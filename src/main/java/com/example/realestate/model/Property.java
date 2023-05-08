@@ -20,4 +20,14 @@ public class Property {
     @Column
     private String size;
 
+
+    public Property() {
+    }
+
+    public Property(Long property_id, String address, double price, String size) {
+        this.property_id = property_id;
+        this.address = address;
+        this.price = price;
+        this.size = size;
+    }
 }
