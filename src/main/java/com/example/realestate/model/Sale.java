@@ -49,4 +49,13 @@ public class Sale {
     public void setSaleDate(Date saleDate) {
         this.saleDate = saleDate;
     }
+
+    @Override
+    public String toString() {
+        return "Sale{" +
+                "sale_id=" + sale_id +
+                ", price=" + price +
+                ", saleDate=" + saleDate +
+                '}';
+    }
 }
