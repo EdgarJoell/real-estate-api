@@ -21,4 +21,15 @@ public class Agent {
 
     @Column
     private String phoneNumber;
+
+    public Agent() {
+    }
+
+    public Agent(Long id, String name, String email, String password, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+    }
 }
