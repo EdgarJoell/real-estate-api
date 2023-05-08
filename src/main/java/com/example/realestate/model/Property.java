@@ -63,4 +63,15 @@ public class Property {
     public void setSize(String size) {
         this.size = size;
     }
+
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "property_id=" + property_id +
+                ", address='" + address + '\'' +
+                ", price=" + price +
+                ", size='" + size + '\'' +
+                '}';
+    }
 }
