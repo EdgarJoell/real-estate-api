@@ -30,4 +30,37 @@ public class Property {
         this.price = price;
         this.size = size;
     }
+
+
+    public Long getProperty_id() {
+        return property_id;
+    }
+
+    public void setProperty_id(Long property_id) {
+        this.property_id = property_id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
 }
