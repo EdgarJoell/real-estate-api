@@ -1,5 +1,7 @@
 package com.example.realestate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -19,19 +21,22 @@ public class Sale {
 
     @ManyToOne
     @JoinColumn(name = "property_id")
+    @JsonIgnore
     private Property property;
 
     @ManyToOne
     @JoinColumn(name = "agent_id")
+    @JsonIgnore
     private Agent agent;
 
     public Sale() {
     }
 
-    public Sale(Long sale_id, double price, Date saleDate) {
+    public Sale(Long sale_id, double price, Date saleDate, Property property) {
         this.sale_id = sale_id;
         this.price = price;
         this.saleDate = saleDate;
+        this.property = property;
     }
 
     public Property getProperty() {

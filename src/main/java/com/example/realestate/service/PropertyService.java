@@ -1,0 +1,90 @@
+package com.example.realestate.service;
+
+import com.example.realestate.exception.InformationExistException;
+import com.example.realestate.exception.InformationNotFoundException;
+import com.example.realestate.model.Property;
+import com.example.realestate.repository.PropertyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class PropertyService {
+    private PropertyRepository propertyRepository;
+
+    @Autowired
+    public void setPropertyRepository(PropertyRepository propertyRepository) {
+        this.propertyRepository = propertyRepository;
+    }
+
+    /**
+     * Gets a list of properties
+     * @return a list of properties
+     */
+    public List<Property> getProperties() {
+        return propertyRepository.findAll();
+    }
+
+    /**
+     * Gets property by property id
+     * @param propertyId we are searching for
+     * @return property based on id
+     */
+    public Property getProperty(Long propertyId) {
+        return propertyRepository.findById(propertyId).orElse(null);
+    }
+
+    /**
+     * Creates property object
+     * @param propertyObject property object being added
+     * @return the added property object
+     * @throws InformationExistException if property already exists
+     */
+
+    public Optional<Property> createProperty(Property propertyObject) {
+        Optional<Property> property = propertyRepository.findByAddress(propertyObject.getAddress());
+        if (property.isPresent()) {
+            throw new InformationExistException("Property " + property.get().getAddress() + " already exists");
+        } else {
+            return Optional.of(propertyRepository.save(propertyObject));
+        }
+    }
+
+    /**
+     * Updates property object
+     * @param propertyId property id we are updating
+     * @param propertyObject property object we are updating to
+     * @return updated property
+     * @throws InformationNotFoundException if property address not found
+     */
+    public Optional<Property> updateProperty(Long propertyId, Property propertyObject) {
+        Optional<Property> property = propertyRepository.findByAddress(propertyObject.getAddress());
+        if(property.isPresent()){
+            property.get().setPrice(propertyObject.getPrice());
+            property.get().setSize(propertyObject.getSize());
+            return Optional.of(propertyRepository.save(property.get()));
+        } else {
+            throw new InformationNotFoundException("Property with address: " + propertyObject.getAddress() + " doesn't exist");
+        }
+    }
+
+    /**
+     * Deletes property by property id
+     * @param propertyId property id we are deleting
+     * @return a String stating whether it was successfully deleted if property id exists
+     * @throws InformationNotFoundException if property id does not exist
+     */
+    public String deleteProperty(Long propertyId) {
+        Optional<Property> property = propertyRepository.findById(propertyId);
+        if(property.isPresent()) {
+            propertyRepository.deleteById(propertyId);
+            return "Property with id " + propertyId + " was deleted";
+        } else {
+            throw new InformationNotFoundException("Property with id: " + propertyId + " doesn't exist");
+        }
+    }
+}
