@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -147,6 +148,13 @@ public class SpringBootCucumberTestDefinitions {
     }
 
     @When("I add a sale to my sales list")
-    public void iAddASaleToMySalesList() {
+    public void iAddASaleToMySalesList() throws JSONException {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("price", 100000.00);
+        requestBody.put("Date", new Date(2022, 2, 2));
+        request.header("Content-Type", "application/json");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/sales/");
     }
 }

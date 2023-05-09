@@ -30,9 +30,9 @@ public class SaleController {
         return saleService.getSaleById(saleId);
     }
 
-    @PostMapping(path = "/sales/")
-    public Optional<Sale> createSale(@RequestBody Sale sale) {
-        return saleService.createSale(sale);
-    }
+//    @PostMapping(path = "/sales/")
+//    public Optional<Sale> createSale(@RequestBody Sale sale) {
+//        return saleService.createSale(sale);
+//    }
 
 }
