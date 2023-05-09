@@ -39,6 +39,9 @@ public class Property {
         this.size = size;
     }
 
+    public List<Sale> getSaleList() {
+        return saleList;
+    }
 
     public Long getProperty_id() {
         return property_id;
@@ -82,4 +85,6 @@ public class Property {
                 ", size='" + size + '\'' +
                 '}';
     }
+
+
 }
