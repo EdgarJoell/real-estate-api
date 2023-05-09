@@ -1,4 +1,4 @@
-package com.example.realestate.definitions;
+package definitions;
 
 public class SpringBootTestDefinitions {
 }
