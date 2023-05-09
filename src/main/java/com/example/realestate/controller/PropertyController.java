@@ -4,10 +4,8 @@ import com.example.realestate.model.Property;
 import com.example.realestate.repository.PropertyRepository;
 import com.example.realestate.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,4 +34,16 @@ public class PropertyController {
     public Property getProperty(@PathVariable Long propertyId) {
         return propertyService.getProperty(propertyId);
     }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(path = "/properties/")
+    public Optional<Property> createProperty(@RequestBody Property propertyObject) {
+        return propertyService.createProperty(propertyObject);
+    }
+
+    @PutMapping(path = "/properties/{propertyId}/")
+    public Optional<Property> updateProperty(@PathVariable Long propertyId, @RequestBody Property propertyObject) {
+        return propertyService.updateProperty(propertyId,propertyObject);
+    }
+
 }

@@ -4,3 +4,7 @@ Feature: Rest API functionalities
     Given A list of properties are available
     When I search for one property by id
     Then property is displayed
+    When I add a property to my property list
+    Then The property is added
+    When I update a property from my property list
+    Then The property is updated
