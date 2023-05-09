@@ -4,6 +4,7 @@ import com.example.realestate.RealEstateApplication;
 import com.example.realestate.model.Property;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
@@ -55,5 +56,10 @@ public class SpringBootCucumberTestDefinitions {
         request.header("Content-Type", "application/json");
         response = request.get(BASE_URL + port + "/api/properties/1/");
         Assert.assertNotNull(response.body());
+    }
+
+    @Then("property is displayed")
+    public void propertyIsDisplayed() {
+        Assert.assertEquals(200, response.getStatusCode());
     }
 }
