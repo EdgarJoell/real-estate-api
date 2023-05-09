@@ -82,4 +82,16 @@ public class SpringBootCucumberTestDefinitions {
         Assert.assertEquals(201, response.getStatusCode());
 
     }
+
+    @When("I update a property from my property list")
+    public void iUpdateAPropertyFromMyPropertyList() throws JSONException {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("address", "New address");
+        requestBody.put("size", 200);
+        requestBody.put("price", 10000.00);
+        response = request.body(requestBody.toString()).put(BASE_URL+ port + "/api/properties/1/");
+    }
 }
