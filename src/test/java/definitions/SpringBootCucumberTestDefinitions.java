@@ -1,10 +1,16 @@
 package definitions;
 
 import com.example.realestate.RealEstateApplication;
+import com.example.realestate.model.Property;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
+import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -16,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = RealEstateApplication.class)
@@ -40,5 +47,19 @@ public class SpringBootCucumberTestDefinitions {
         } catch (HttpClientErrorException e) {
             e.printStackTrace();
         }
+    }
+
+    @When("I search for one property by id")
+    public void iSearchForOnePropertyById() {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        response = request.get(BASE_URL + port + "/api/properties/1/");
+        Assert.assertNotNull(response.body());
+    }
+
+    @Then("property is displayed")
+    public void propertyIsDisplayed() {
+        Assert.assertEquals(200, response.getStatusCode());
     }
 }
