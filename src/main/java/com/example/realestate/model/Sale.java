@@ -17,6 +17,10 @@ public class Sale {
     @Column
     private Date saleDate;
 
+    @ManyToOne
+    @JoinColumn(name = "property_id")
+    private Property property;
+
     public Sale() {
     }
 
@@ -24,6 +28,10 @@ public class Sale {
         this.sale_id = sale_id;
         this.price = price;
         this.saleDate = saleDate;
+    }
+
+    public Property getProperty() {
+        return property;
     }
 
     public Long getSale_id() {
@@ -58,4 +66,5 @@ public class Sale {
                 ", saleDate=" + saleDate +
                 '}';
     }
+
 }
