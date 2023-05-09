@@ -30,6 +30,10 @@ public class Agent {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Property> propertyList;
 
+    @OneToMany(mappedBy = "agent", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Sale> saleList;
+
     public Agent() {
     }
 
@@ -43,6 +47,10 @@ public class Agent {
 
     public List<Property> getPropertyList() {
         return propertyList;
+    }
+
+    public List<Sale> getSaleList() {
+        return saleList;
     }
     public Long getId() {
         return id;
