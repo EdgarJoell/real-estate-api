@@ -49,4 +49,13 @@ public class PropertyService {
         }
     }
 
+    public String deleteProperty(Long propertyId) {
+        Optional<Property> property = propertyRepository.findById(propertyId);
+        if(property.isPresent()) {
+            propertyRepository.deleteById(propertyId);
+            return "Property with id " + propertyId + " was deleted";
+        } else {
+            throw new InformationNotFoundException("Property with id: " + propertyId + " doesn't exist");
+        }
+    }
 }

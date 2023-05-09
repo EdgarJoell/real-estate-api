@@ -111,6 +111,6 @@ public class SpringBootCucumberTestDefinitions {
     @Then("the property is deleted")
     public void thePropertyIsDeleted() {
         Assert.assertEquals(200, response.getStatusCode());
-        Assert.assertNull(response.body());
+        Assert.assertNotNull(response.body());
     }
 }
