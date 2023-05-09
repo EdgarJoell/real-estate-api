@@ -1,6 +1,10 @@
 package com.example.realestate.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "agents")
@@ -22,6 +26,14 @@ public class Agent {
     @Column
     private String phoneNumber;
 
+    @OneToMany(mappedBy = "agent", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Property> propertyList;
+
+    @OneToMany(mappedBy = "agent", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Sale> saleList;
+
     public Agent() {
     }
 
@@ -33,6 +45,13 @@ public class Agent {
         this.phoneNumber = phoneNumber;
     }
 
+    public List<Property> getPropertyList() {
+        return propertyList;
+    }
+
+    public List<Sale> getSaleList() {
+        return saleList;
+    }
     public Long getId() {
         return id;
     }
@@ -83,4 +102,5 @@ public class Agent {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
+
 }

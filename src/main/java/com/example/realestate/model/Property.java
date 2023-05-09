@@ -1,6 +1,11 @@
 package com.example.realestate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "properties")
@@ -20,6 +25,14 @@ public class Property {
     @Column
     private String size;
 
+    @OneToMany(mappedBy = "property")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Sale> saleList;
+
+    @ManyToOne
+    @JoinColumn(name = "agent_id")
+    @JsonIgnore
+    private Agent agent;
 
     public Property() {
     }
@@ -31,6 +44,13 @@ public class Property {
         this.size = size;
     }
 
+    public List<Sale> getSaleList() {
+        return saleList;
+    }
+
+    public Agent getAgent() {
+        return agent;
+    }
 
     public Long getProperty_id() {
         return property_id;
@@ -74,4 +94,5 @@ public class Property {
                 ", size='" + size + '\'' +
                 '}';
     }
+
 }
