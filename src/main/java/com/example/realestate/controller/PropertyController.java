@@ -5,22 +5,22 @@ import com.example.realestate.repository.PropertyRepository;
 import com.example.realestate.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/")
 public class PropertyController {
-    @Autowired
-    private PropertyRepository propertyRepository;
 
     private PropertyService propertyService;
 
     @Autowired
-    public void setPropertyRepository(PropertyRepository propertyRepository) {
-        this.propertyRepository = propertyRepository;
+    public void setPropertyService(PropertyService propertyService) {
+        this.propertyService = propertyService;
     }
 
     /**
@@ -30,5 +30,10 @@ public class PropertyController {
     @GetMapping(path = "/properties/")
     public List<Property> getProperties() {
         return propertyService.getProperties();
+    }
+
+    @GetMapping(path = "/properties/{propertyId}/")
+    public Property getProperty(@PathVariable Long propertyId) {
+        return propertyService.getProperty(propertyId);
     }
 }
