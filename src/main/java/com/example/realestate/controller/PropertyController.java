@@ -19,6 +19,10 @@ public class PropertyController {
         this.propertyRepository = propertyRepository;
     }
 
+    /**
+     * Gets a list or properties, if there are any
+     * @return List of properties
+     */
     @GetMapping(path = "/properties/")
     public List<Property> getProperties() {
         return propertyRepository.findAll();
