@@ -21,13 +21,29 @@ public class PropertyService {
         this.propertyRepository = propertyRepository;
     }
 
+    /**
+     * Gets a list of properties
+     * @return a list of properties
+     */
     public List<Property> getProperties() {
         return propertyRepository.findAll();
     }
 
+    /**
+     * Gets property by property id
+     * @param propertyId we are searching for
+     * @return property based on id
+     */
     public Property getProperty(Long propertyId) {
         return propertyRepository.findById(propertyId).orElse(null);
     }
+
+    /**
+     * Creates property object
+     * @param propertyObject property object being added
+     * @return the added property object
+     * @throws InformationExistException if property already exists
+     */
 
     public Optional<Property> createProperty(Property propertyObject) {
         Optional<Property> property = propertyRepository.findByAddress(propertyObject.getAddress());
@@ -38,6 +54,13 @@ public class PropertyService {
         }
     }
 
+    /**
+     * Updates property object
+     * @param propertyId property id we are updating
+     * @param propertyObject property object we are updating to
+     * @return updated property
+     * @throws InformationNotFoundException if property address not found
+     */
     public Optional<Property> updateProperty(Long propertyId, Property propertyObject) {
         Optional<Property> property = propertyRepository.findByAddress(propertyObject.getAddress());
         if(property.isPresent()){
@@ -49,6 +72,12 @@ public class PropertyService {
         }
     }
 
+    /**
+     * Deletes property by property id
+     * @param propertyId property id we are deleting
+     * @return a String stating whether it was successfully deleted if property id exists
+     * @throws InformationNotFoundException if property id does not exist
+     */
     public String deleteProperty(Long propertyId) {
         Optional<Property> property = propertyRepository.findById(propertyId);
         if(property.isPresent()) {
