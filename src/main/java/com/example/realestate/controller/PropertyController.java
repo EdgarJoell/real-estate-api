@@ -40,4 +40,10 @@ public class PropertyController {
     public Optional<Property> createProperty(@RequestBody Property propertyObject) {
         return propertyService.createProperty(propertyObject);
     }
+
+    @PutMapping(path = "/properties/1")
+    public Optional<Property> createProperty(@PathVariable Long propertyId, @RequestBody Property propertyObject) {
+        return propertyService.updateProperty(propertyId,propertyObject);
+    }
+
 }
