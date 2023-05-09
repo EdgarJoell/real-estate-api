@@ -99,4 +99,18 @@ public class SpringBootCucumberTestDefinitions {
         Assert.assertEquals(200, response.getStatusCode());
         Assert.assertNotNull(response.body());
     }
+
+    @When("I delete a property from property list")
+    public void iDeleteAPropertyFromPropertyList() {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        response = request.delete(BASE_URL+ port + "/api/properties/1/");
+    }
+
+    @Then("the property is deleted")
+    public void thePropertyIsDeleted() {
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertNotNull(response.body());
+    }
 }

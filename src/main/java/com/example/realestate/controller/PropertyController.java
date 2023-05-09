@@ -46,4 +46,8 @@ public class PropertyController {
         return propertyService.updateProperty(propertyId,propertyObject);
     }
 
+    @DeleteMapping(path = "/properties/{propertyId}")
+    public String deleteProperty(@PathVariable Long propertyId) {
+        return propertyService.deleteProperty(propertyId);
+    }
 }

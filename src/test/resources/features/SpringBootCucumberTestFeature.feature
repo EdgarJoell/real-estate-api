@@ -8,3 +8,5 @@ Feature: Rest API functionalities
     Then The property is added
     When I update a property from my property list
     Then The property is updated
+    When I delete a property from property list
+    Then the property is deleted
