@@ -40,12 +40,12 @@ public class SpringBootCucumberTestDefinitions {
     public void aListOfPropertiesAreAvailable() {
         try {
             ResponseEntity<String> response = new RestTemplate().exchange(BASE_URL + port + "/api/properties/", HttpMethod.GET, null, String.class);
-            List<Map<String, String>> categories = JsonPath
+            List<Map<String, String>> properties = JsonPath
                     .from(String.valueOf(response
                             .getBody()))
                     .getList("$");
             Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
-            Assert.assertTrue(categories.size() > 0);
+            Assert.assertTrue(properties.size() > 0);
         } catch (HttpClientErrorException e) {
             e.printStackTrace();
         }
@@ -97,6 +97,7 @@ public class SpringBootCucumberTestDefinitions {
 
     @Then("The property is updated")
     public void thePropertyIsUpdated() {
-
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertNotNull(response.body());
     }
 }
