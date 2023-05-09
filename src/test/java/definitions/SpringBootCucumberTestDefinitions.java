@@ -113,4 +113,21 @@ public class SpringBootCucumberTestDefinitions {
         Assert.assertEquals(200, response.getStatusCode());
         Assert.assertNotNull(response.body());
     }
+
+    @Given("A list of sales are available")
+    public void aListOfSalesAreAvailable() {
+        try {
+            ResponseEntity<String> response = new RestTemplate()
+                    .exchange(BASE_URL + port + "/api/sales/", HttpMethod.GET, null, String.class);
+            List<Map<String, String>> sales = JsonPath
+                    .from(String.valueOf(response
+                            .getBody()))
+                    .getList("$");
+            Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
+            Assert.assertTrue(sales.size() > 0);
+        } catch (HttpClientErrorException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

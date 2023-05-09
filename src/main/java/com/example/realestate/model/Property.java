@@ -25,7 +25,7 @@ public class Property {
     @Column
     private int size;
 
-    @OneToMany(mappedBy = "property")
+    @OneToMany(mappedBy = "property", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Sale> saleList;
 
