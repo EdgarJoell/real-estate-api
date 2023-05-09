@@ -94,4 +94,9 @@ public class SpringBootCucumberTestDefinitions {
         requestBody.put("price", 10000.00);
         response = request.body(requestBody.toString()).put(BASE_URL+ port + "/api/properties/1/");
     }
+
+    @Then("The property is updated")
+    public void thePropertyIsUpdated() {
+
+    }
 }
