@@ -1,16 +1,23 @@
 package com.example.realestate.seed;
 
 import com.example.realestate.model.Property;
+import com.example.realestate.model.Sale;
 import com.example.realestate.repository.PropertyRepository;
+import com.example.realestate.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
-public class PropertyDataLoader implements CommandLineRunner {
+public class DataLoader implements CommandLineRunner {
 
     @Autowired
     PropertyRepository propertyRepository;
+
+    @Autowired
+    SaleRepository saleRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -30,6 +37,17 @@ public class PropertyDataLoader implements CommandLineRunner {
             propertyRepository.save(property3);
             propertyRepository.save(property4);
             propertyRepository.save(property5);
+
+            Sale sale1 = new Sale(1L,  1500.00, new Date(2023, 05, 01), property1);
+            Sale sale2 = new Sale(2L, 1000.00 , new Date(2023, 05, 02), property2);
+            Sale sale3 = new Sale(3L, 2000, new Date(2023, 05, 03), property3);
+
+            saleRepository.save(sale1);
+            saleRepository.save(sale2);
+            saleRepository.save(sale3);
         }
+
+
     }
+
 }
