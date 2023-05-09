@@ -130,4 +130,13 @@ public class SpringBootCucumberTestDefinitions {
         }
 
     }
+
+    @When("I search for one sale by id")
+    public void iSearchForOneSaleById() {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        response = request.get(BASE_URL + port + "/api/sales/1/");
+        Assert.assertNotNull(response.body());
+    }
 }
