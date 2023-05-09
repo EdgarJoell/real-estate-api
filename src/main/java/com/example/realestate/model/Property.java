@@ -23,7 +23,7 @@ public class Property {
     private double price;
 
     @Column
-    private String size;
+    private int size;
 
     @OneToMany(mappedBy = "property")
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -37,7 +37,7 @@ public class Property {
     public Property() {
     }
 
-    public Property(Long property_id, String address, double price, String size) {
+    public Property(Long property_id, String address, double price, int size) {
         this.property_id = property_id;
         this.address = address;
         this.price = price;
@@ -76,11 +76,11 @@ public class Property {
         this.price = price;
     }
 
-    public String getSize() {
+    public int getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(int size) {
         this.size = size;
     }
 
