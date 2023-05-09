@@ -11,6 +11,8 @@ import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -61,5 +63,17 @@ public class SpringBootCucumberTestDefinitions {
     @Then("property is displayed")
     public void propertyIsDisplayed() {
         Assert.assertEquals(200, response.getStatusCode());
+    }
+
+    @When("I add a property to my property list")
+    public void iAddAPropertyToMyPropertyList() throws JSONException {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("address", "100 South State");
+        requestBody.put("size", 900);
+        requestBody.put("price", 1500.00);
+        request.header("Content-Type", "application/json");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/properties/");
     }
 }
