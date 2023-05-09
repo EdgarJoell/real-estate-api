@@ -160,7 +160,7 @@ public class SpringBootCucumberTestDefinitions {
 
     @Then("The sale is added")
     public void theSaleIsAdded() {
-        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertEquals(201, response.getStatusCode());
         Assert.assertNotNull(response.body());
     }
 }
