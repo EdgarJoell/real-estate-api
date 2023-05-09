@@ -15,3 +15,4 @@ Feature: Rest API functionalities
     Given A list of sales are available
     When I search for one sale by id
     Then The sale is displayed
+    When I add a sale to my sales list

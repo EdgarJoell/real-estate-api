@@ -145,4 +145,8 @@ public class SpringBootCucumberTestDefinitions {
         Assert.assertEquals(200, response.getStatusCode());
         Assert.assertNotNull(response.body());
     }
+
+    @When("I add a sale to my sales list")
+    public void iAddASaleToMySalesList() {
+    }
 }
