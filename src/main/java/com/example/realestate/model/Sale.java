@@ -21,6 +21,10 @@ public class Sale {
     @JoinColumn(name = "property_id")
     private Property property;
 
+    @ManyToOne
+    @JoinColumn(name = "agent_id")
+    private Agent agent;
+
     public Sale() {
     }
 
@@ -32,6 +36,10 @@ public class Sale {
 
     public Property getProperty() {
         return property;
+    }
+
+    public Agent getAgent() {
+        return agent;
     }
 
     public Long getSale_id() {
