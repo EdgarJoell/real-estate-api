@@ -1,6 +1,10 @@
 package com.example.realestate.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "properties")
@@ -19,6 +23,10 @@ public class Property {
 
     @Column
     private String size;
+
+    @OneToMany(mappedBy = "property")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Sale> saleList;
 
 
     public Property() {
