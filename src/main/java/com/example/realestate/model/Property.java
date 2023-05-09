@@ -1,5 +1,6 @@
 package com.example.realestate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -28,6 +29,10 @@ public class Property {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Sale> saleList;
 
+    @ManyToOne
+    @JoinColumn(name = "agent_id")
+    @JsonIgnore
+    private Agent agent;
 
     public Property() {
     }
@@ -41,6 +46,10 @@ public class Property {
 
     public List<Sale> getSaleList() {
         return saleList;
+    }
+
+    public Agent getAgent() {
+        return agent;
     }
 
     public Long getProperty_id() {
@@ -85,6 +94,5 @@ public class Property {
                 ", size='" + size + '\'' +
                 '}';
     }
-
 
 }
