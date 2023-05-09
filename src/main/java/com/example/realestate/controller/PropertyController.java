@@ -42,7 +42,7 @@ public class PropertyController {
     }
 
     @PutMapping(path = "/properties/1")
-    public Optional<Property> createProperty(@PathVariable Long propertyId, @RequestBody Property propertyObject) {
+    public Optional<Property> updateProperty(@PathVariable Long propertyId, @RequestBody Property propertyObject) {
         return propertyService.updateProperty(propertyId,propertyObject);
     }
 
