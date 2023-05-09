@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -129,5 +130,37 @@ public class SpringBootCucumberTestDefinitions {
             e.printStackTrace();
         }
 
+    }
+
+    @When("I search for one sale by id")
+    public void iSearchForOneSaleById() {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        response = request.get(BASE_URL + port + "/api/sales/1/");
+        Assert.assertNotNull(response.body());
+    }
+
+    @Then("The sale is displayed")
+    public void theSaleIsDisplayed() {
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertNotNull(response.body());
+    }
+
+    @When("I add a sale to my sales list")
+    public void iAddASaleToMySalesList() throws JSONException {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("price", 100000.00);
+        requestBody.put("Date", new Date(2022, 2, 2));
+        request.header("Content-Type", "application/json");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/sales/");
+    }
+
+    @Then("The sale is added")
+    public void theSaleIsAdded() {
+        Assert.assertEquals(201, response.getStatusCode());
+        Assert.assertNotNull(response.body());
     }
 }

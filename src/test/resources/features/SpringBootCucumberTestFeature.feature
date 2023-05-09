@@ -13,3 +13,7 @@ Feature: Rest API functionalities
 
   Scenario: Agent is able to create sale
     Given A list of sales are available
+    When I search for one sale by id
+    Then The sale is displayed
+    When I add a sale to my sales list
+    Then The sale is added

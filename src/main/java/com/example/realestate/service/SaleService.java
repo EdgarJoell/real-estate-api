@@ -4,8 +4,10 @@ import com.example.realestate.model.Sale;
 import com.example.realestate.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SaleService {
@@ -20,5 +22,13 @@ public class SaleService {
     public List<Sale> getSales() {
         return saleRepository.findAll();
     }
+
+    public Optional<Sale> getSaleById(Long saleId) {
+        return saleRepository.findById(saleId);
+    }
+    public Optional<Sale> createSale(@RequestBody Sale sale) {
+        return Optional.of(saleRepository.save(sale));
+    }
+
 
 }
