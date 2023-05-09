@@ -6,3 +6,5 @@ Feature: Rest API functionalities
     Then property is displayed
     When I add a property to my property list
     Then The property is added
+    When I update a property from my property list
+    #Then The property is added
