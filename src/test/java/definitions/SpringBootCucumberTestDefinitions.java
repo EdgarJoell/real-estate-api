@@ -76,4 +76,10 @@ public class SpringBootCucumberTestDefinitions {
         request.header("Content-Type", "application/json");
         response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/properties/");
     }
+
+    @Then("The property is added")
+    public void thePropertyIsAdded() {
+        Assert.assertEquals(201, response.getStatusCode());
+
+    }
 }

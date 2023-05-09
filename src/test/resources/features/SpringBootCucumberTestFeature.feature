@@ -5,3 +5,4 @@ Feature: Rest API functionalities
     When I search for one property by id
     Then property is displayed
     When I add a property to my property list
+    Then The property is added
