@@ -139,4 +139,10 @@ public class SpringBootCucumberTestDefinitions {
         response = request.get(BASE_URL + port + "/api/sales/1/");
         Assert.assertNotNull(response.body());
     }
+
+    @Then("The sale is displayed")
+    public void theSaleIsDisplayed() {
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertNotNull(response.body());
+    }
 }
