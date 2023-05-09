@@ -19,13 +19,28 @@ public class SaleService {
         this.saleRepository = saleRepository;
     }
 
+    /**
+     * Gets a list of Sales
+     * @return a list of sales
+     */
     public List<Sale> getSales() {
         return saleRepository.findAll();
     }
 
+    /**
+     * Gets sale by id
+     * @param saleId we are searching for
+     * @return sale based on id
+     */
     public Optional<Sale> getSaleById(Long saleId) {
         return saleRepository.findById(saleId);
     }
+
+    /**
+     * Creates sale
+     * @param sale we are adding
+     * @return sale added
+     */
     public Optional<Sale> createSale(@RequestBody Sale sale) {
         return Optional.of(saleRepository.save(sale));
     }
