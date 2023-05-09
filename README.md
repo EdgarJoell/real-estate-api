@@ -32,14 +32,15 @@ Gold:
 
 ## API Endpoints
 
-| Request Type | URL                                  | Functionality            | Access | 
-|--------------|--------------------------------------|--------------------------|---------|
-| POST         | /users/login/                        | User login               	| Public |
-| POST         | /users/register/                    | User registration        	| Public |
-| GET          | /properties/                           | Properties 		| Public |
-| GET          | /properties/{id}/                   | Property           	| Public |
-| POST         | /properties/                         | Create Property          	| Private |
-| PUT          | /properties/{id}/                  | Update Property         	| Private |
-| DELETE       | /properties/{id}/   	| Delete Property         	| Private |
-| GET        | /sales/                       | Get all sales                | Private |
-| POST        | /sales/                       | Add sale                    | Private |
+| Request Type | URL                   | Functionality              | Access | 
+|--------------|-----------------------|----------------------------|---------|
+| POST         | /users/login/         | User login               	 | Public |
+| POST         | /users/register/      | User registration        	 | Public |
+| GET          | /properties/          | Properties 		              | Public |
+| GET          | /properties/{id}/     | Property           	       | Public |
+| POST         | /properties/          | Create Property          	 | Private |
+| PUT          | /properties/{id}/     | Update Property         	  | Private |
+| DELETE       | /properties/{id}/   	 | Delete Property         	  | Private |
+| GET        | /sales/               | Get all sales              | Private |
+| GET        | /sales/{id}/          | Get sale by id             | Private |
+| POST        | /sales/               | Add sale                   | Private |
