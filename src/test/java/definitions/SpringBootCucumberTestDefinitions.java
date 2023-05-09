@@ -24,7 +24,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = RealEstateApplication.class)
@@ -87,11 +86,11 @@ public class SpringBootCucumberTestDefinitions {
     public void iUpdateAPropertyFromMyPropertyList() throws JSONException {
         RestAssured.baseURI = BASE_URL;
         RequestSpecification request = RestAssured.given();
-        request.header("Content-Type", "application/json");
         JSONObject requestBody = new JSONObject();
-        requestBody.put("address", "New address");
+        requestBody.put("address", "123 Programmer Ln");
         requestBody.put("size", 200);
         requestBody.put("price", 10000.00);
+        request.header("Content-Type", "application/json");
         response = request.body(requestBody.toString()).put(BASE_URL+ port + "/api/properties/1/");
     }
 
