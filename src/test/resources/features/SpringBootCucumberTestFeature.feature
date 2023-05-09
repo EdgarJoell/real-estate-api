@@ -16,3 +16,4 @@ Feature: Rest API functionalities
     When I search for one sale by id
     Then The sale is displayed
     When I add a sale to my sales list
+    Then The sale is added

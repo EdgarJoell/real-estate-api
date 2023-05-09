@@ -157,4 +157,10 @@ public class SpringBootCucumberTestDefinitions {
         request.header("Content-Type", "application/json");
         response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/sales/");
     }
+
+    @Then("The sale is added")
+    public void theSaleIsAdded() {
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertNotNull(response.body());
+    }
 }
