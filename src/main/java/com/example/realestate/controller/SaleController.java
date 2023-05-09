@@ -26,11 +26,21 @@ public class SaleController {
         return saleService.getSales();
     }
 
+    /**
+     * Calls on getSaleById() from Sale Service
+     * @param saleId sale id we are searching for
+     * @return a sale by sale id
+     */
     @GetMapping(path = "/sales/{saleId}/")
     public Optional<Sale> getSaleById(@PathVariable Long saleId) {
         return saleService.getSaleById(saleId);
     }
 
+    /**
+     * Calls on getSaleById() from Sale Service
+     * @param sale sale we are creating
+     * @return the sale we created
+     */
     @PostMapping(path = "/sales/")
     @ResponseStatus(HttpStatus.CREATED)
     public Optional<Sale> createSale(@RequestBody Sale sale) {
