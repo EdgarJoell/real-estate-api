@@ -28,6 +28,11 @@ public class JWTUtils {
                 .compact();
     }
 
+    public String getAgentNameFromJwtToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(token).getBody().getSubject();
+    }
+
+
 
 
 }
