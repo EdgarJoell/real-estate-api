@@ -27,12 +27,12 @@ public class Agent {
     @Column
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "agent", orphanRemoval = true)
+    @OneToMany(mappedBy = "agent")
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIgnore
     private List<Property> propertyList;
 
-    @OneToMany(mappedBy = "agent", orphanRemoval = true)
+    @OneToMany(mappedBy = "agent")
     @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIgnore
     private List<Sale> saleList;
