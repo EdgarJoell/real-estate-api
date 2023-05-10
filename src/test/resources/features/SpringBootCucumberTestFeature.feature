@@ -17,3 +17,8 @@ Feature: Rest API functionalities
     Then The sale is displayed
     When I add a sale to my sales list
     Then The sale is added
+
+  Scenario: Agent is able to register and login
+    Given That an agent is able to register
+    # When I login to an account
+    # Then JWT key is returned
