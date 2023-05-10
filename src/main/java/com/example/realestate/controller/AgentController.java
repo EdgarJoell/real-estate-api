@@ -1,13 +1,12 @@
 package com.example.realestate.controller;
 
 import com.example.realestate.model.Agent;
+import com.example.realestate.model.request.LoginRequest;
 import com.example.realestate.service.AgentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/auth/")
@@ -20,7 +19,12 @@ public class AgentController {
     }
 
     @PostMapping(path = "/register/")
+    @ResponseStatus(HttpStatus.CREATED)
     public Agent registerAgent(@RequestBody Agent agentObject) {
         return agentService.registerAgent(agentObject);
+    }
+    @PostMapping(path = "/login/")
+    public ResponseEntity<?> loginAgent(@RequestBody LoginRequest loginRequest){
+        return agentService.loginAgent(loginRequest);
     }
 }

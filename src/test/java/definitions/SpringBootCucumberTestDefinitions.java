@@ -16,9 +16,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -92,7 +90,7 @@ public class SpringBootCucumberTestDefinitions {
         requestBody.put("size", 200);
         requestBody.put("price", 10000.00);
         request.header("Content-Type", "application/json");
-        response = request.body(requestBody.toString()).put(BASE_URL+ port + "/api/properties/1/");
+        response = request.body(requestBody.toString()).put(BASE_URL + port + "/api/properties/1/");
     }
 
     @Then("The property is updated")
@@ -106,7 +104,7 @@ public class SpringBootCucumberTestDefinitions {
         RestAssured.baseURI = BASE_URL;
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        response = request.delete(BASE_URL+ port + "/api/properties/1/");
+        response = request.delete(BASE_URL + port + "/api/properties/1/");
     }
 
     @Then("the property is deleted")
@@ -163,4 +161,44 @@ public class SpringBootCucumberTestDefinitions {
         Assert.assertEquals(201, response.getStatusCode());
         Assert.assertNotNull(response.body());
     }
+
+    @Given("That an agent is able to register")
+    public void thatAnAgentIsAbleToRegister() {
+        try {
+
+            JSONObject requestBody = new JSONObject();
+            requestBody.put("password", "123456");
+            requestBody.put("email", "email@mail.com");
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<String> request = new HttpEntity<String>(requestBody.toString(), headers);
+
+            ResponseEntity<String> response = new RestTemplate().exchange(BASE_URL + port + "/auth/register/", HttpMethod.POST, request, String.class);
+
+            Assert.assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        } catch (HttpClientErrorException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @When("I login to my account")
+    public void iLoginToMyAccount() throws JSONException {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("password", "123456");
+        requestBody.put("email", "email@mail.com");
+        request.header("Content-Type", "application/json");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/login/");
+    }
+
+    @Then("JWT key is returned")
+    public void jwtKeyIsReturned() {
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertNotNull(response.body());
+    }
+
 }
