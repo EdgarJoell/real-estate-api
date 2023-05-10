@@ -21,6 +21,18 @@ import org.springframework.web.context.WebApplicationContext;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
 
+    private MyAgentDetailsService myAgentDetailsService;
+
+    @Autowired
+    public void setMyAgentDetailsService(MyAgentDetailsService myAgentDetailsService) {
+        this.myAgentDetailsService = myAgentDetailsService;
+    }
+
+    @Bean
+    public JwtRequestFilter authJwtRequestFilter() {
+        return new JwtRequestFilter();
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/auth/register/", "/auth/login/", "/api/properties/", "/api/properties/{propertyId}/").permitAll()
