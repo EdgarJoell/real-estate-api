@@ -40,11 +40,13 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/auth/register/", "/auth/login/", "/api/properties/", "/api/properties/{propertyId}/").permitAll()
+        http.authorizeRequests().antMatchers("/auth/register/", "/auth/login/", "/api/properties/", "/api/properties/{propertyId}/")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();
+        http.addFilterBefore(authJwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
