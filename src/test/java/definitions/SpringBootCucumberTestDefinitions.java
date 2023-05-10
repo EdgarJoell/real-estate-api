@@ -195,4 +195,10 @@ public class SpringBootCucumberTestDefinitions {
         response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/login/");
     }
 
+    @Then("JWT key is returned")
+    public void jwtKeyIsReturned() {
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertNotNull(response.body());
+    }
+
 }
