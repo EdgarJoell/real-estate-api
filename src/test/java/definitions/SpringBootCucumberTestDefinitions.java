@@ -183,4 +183,16 @@ public class SpringBootCucumberTestDefinitions {
             throw new RuntimeException(e);
         }
     }
+
+    @When("I login to my account")
+    public void iLoginToMyAccount() throws JSONException {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("password", "123456");
+        requestBody.put("email", "email@mail.com");
+        request.header("Content-Type", "application/json");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/login/");
+    }
+
 }

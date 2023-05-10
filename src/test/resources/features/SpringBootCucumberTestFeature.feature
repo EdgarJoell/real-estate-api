@@ -20,5 +20,5 @@ Feature: Rest API functionalities
 
   Scenario: Agent is able to register and login
     Given That an agent is able to register
-    # When I login to an account
-    # Then JWT key is returned
+    When I login to my account
+    Then JWT key is returned
