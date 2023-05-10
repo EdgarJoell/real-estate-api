@@ -45,6 +45,12 @@ public class DataLoader implements CommandLineRunner {
             Property property4 = new Property(4L, "Assured Ave", 2300, 1000);
             Property property5 = new Property(5L, "Refactor Ln", 2200, 700);
 
+            property1.setAgent(agent1);
+            property2.setAgent(agent1);
+            property3.setAgent(agent2);
+            property4.setAgent(agent3);
+            property5.setAgent(agent3);
+
             propertyRepository.save(property1);
             propertyRepository.save(property2);
             propertyRepository.save(property3);
@@ -55,12 +61,13 @@ public class DataLoader implements CommandLineRunner {
             Sale sale2 = new Sale(2L, 1000.00 , new Date(2023, 05, 02), property2);
             Sale sale3 = new Sale(3L, 2000, new Date(2023, 05, 03), property3);
 
+            sale1.setAgent(agent1);
+            sale2.setAgent(agent1);
+            sale3.setAgent(agent2);
+
             saleRepository.save(sale1);
             saleRepository.save(sale2);
             saleRepository.save(sale3);
         }
-
-
     }
-
 }
