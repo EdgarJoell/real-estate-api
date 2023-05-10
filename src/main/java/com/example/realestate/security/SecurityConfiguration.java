@@ -34,6 +34,11 @@ public class SecurityConfiguration {
     }
 
     @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/auth/register/", "/auth/login/", "/api/properties/", "/api/properties/{propertyId}/").permitAll()
                 .anyRequest().authenticated()
