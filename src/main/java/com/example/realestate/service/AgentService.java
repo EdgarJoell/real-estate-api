@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +42,6 @@ public class AgentService {
     }
 
 
-
     @Autowired
     public void setAgentRepository(AgentRepository agentRepository) {
         this.agentRepository = agentRepository;
@@ -52,15 +53,27 @@ public class AgentService {
 
     public Agent registerAgent(Agent agentObject) {
         if(!agentRepository.existsByEmail(agentObject.getEmail())) {
+            agentObject.setPassword(passwordEncoder.encode(agentObject.getPassword()));
             return agentRepository.save(agentObject);
         } else {
             throw new InformationExistException("An agent with email " + agentObject.getEmail() + " already exists.");
         }
     }
 
+    public Agent findAgentByEmail(String email) {
+        return agentRepository.findAgentByEmail(email);
+    }
+
     public ResponseEntity<?> loginAgent(@RequestBody LoginRequest loginRequest){
         try {
-            return ResponseEntity.ok("");
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            myAgentDetails = (MyAgentDetails) authentication.getPrincipal();
+
+            final String JWT = jwtUtils.generateJwtToken(myAgentDetails);
+            return ResponseEntity.ok(new LoginResponse(JWT));
+//            return ResponseEntity.ok("");
         } catch (Exception e){
             return ResponseEntity.ok(new LoginResponse("Error: username or password is incorrect"));
         }
