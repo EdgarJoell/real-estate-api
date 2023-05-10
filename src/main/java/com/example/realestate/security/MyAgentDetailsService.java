@@ -21,6 +21,6 @@ public class MyAgentDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Agent agent = agentService.findAgentByEmailAddress(username);
-        return null;
+        return new MyAgentDetails(agent);
     }
 }
