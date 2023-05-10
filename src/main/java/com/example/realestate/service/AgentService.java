@@ -17,11 +17,11 @@ public class AgentService {
     }
 
     public Agent findAgentByEmailAddress(String email) {
-        return agentRepository.findAgentByEmailAddress(email);
+        return agentRepository.findAgentByEmail(email);
     }
 
     public Agent registerAgent(Agent agentObject) {
-        if(!agentRepository.existsByEmailAddress(agentObject.getEmail())) {
+        if(!agentRepository.existsByEmail(agentObject.getEmail())) {
             return agentRepository.save(agentObject);
         } else {
             throw new InformationExistException("An agent with email " + agentObject.getEmail() + " already exists.");
