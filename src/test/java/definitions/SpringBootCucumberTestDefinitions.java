@@ -1,7 +1,9 @@
 package definitions;
 
 import com.example.realestate.RealEstateApplication;
+import com.example.realestate.model.Agent;
 import com.example.realestate.model.Property;
+import com.example.realestate.repository.AgentRepository;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,6 +16,7 @@ import io.restassured.specification.RequestSpecification;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
@@ -23,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = RealEstateApplication.class)
@@ -33,6 +37,25 @@ public class SpringBootCucumberTestDefinitions {
     String port;
 
     private static Response response;
+
+    private AgentRepository agentRepository;
+
+    @Autowired
+    public void setAgentRepository(AgentRepository agentRepository) {
+        this.agentRepository = agentRepository;
+    }
+
+    public String getSecurityKey() throws Exception {
+        Optional<Agent> agent = agentRepository.findById(1L);
+        RequestSpecification request = RestAssured.given();
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("username", agent.get().getEmail());
+        requestBody.put("password", agent.get().getPassword());
+
+        Response authResponse = request.body(requestBody.toString()).post(BASE_URL + port + "/api/authenticate/");
+        return authResponse.jsonPath().getString("token");
+    }
 
     @Given("A list of properties are available")
     public void aListOfPropertiesAreAvailable() {
@@ -64,9 +87,9 @@ public class SpringBootCucumberTestDefinitions {
     }
 
     @When("I add a property to my property list")
-    public void iAddAPropertyToMyPropertyList() throws JSONException {
+    public void iAddAPropertyToMyPropertyList() throws Exception {
         RestAssured.baseURI = BASE_URL;
-        RequestSpecification request = RestAssured.given();
+        RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + getSecurityKey());
         JSONObject requestBody = new JSONObject();
         requestBody.put("address", "100 South State");
         requestBody.put("size", 900);

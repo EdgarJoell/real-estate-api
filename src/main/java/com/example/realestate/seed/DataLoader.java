@@ -31,9 +31,9 @@ public class DataLoader implements CommandLineRunner {
 
     private void loadUserData() {
         if (propertyRepository.count() == 0 || saleRepository.count() == 0 || agentRepository.count() == 0) {
-            Agent agent1 = new Agent(1l, "Bob", "mail@gmail.com", "123456", "999-999-9999");
-            Agent agent2 = new Agent(1l, "Tom", "mail1@gmail.com", "123456", "999-999-9988");
-            Agent agent3 = new Agent(1l, "Ann", "mail2@gmail.com", "123456", "999-999-9989");
+            Agent agent1 = new Agent(1L, "Bob", "mail@gmail.com", "123456", "999-999-9999");
+            Agent agent2 = new Agent(2L, "Tom", "mail1@gmail.com", "123456", "999-999-9988");
+            Agent agent3 = new Agent(3L, "Ann", "mail2@gmail.com", "123456", "999-999-9989");
 
             agentRepository.save(agent1);
             agentRepository.save(agent2);
