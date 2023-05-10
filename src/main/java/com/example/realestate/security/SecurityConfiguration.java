@@ -21,19 +21,53 @@ import org.springframework.web.context.WebApplicationContext;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
 
+    private MyAgentDetailsService myAgentDetailsService;
+
+    @Autowired
+    public void setMyAgentDetailsService(MyAgentDetailsService myAgentDetailsService) {
+        this.myAgentDetailsService = myAgentDetailsService;
+    }
+
+    @Bean
+    public JwtRequestFilter authJwtRequestFilter() {
+        return new JwtRequestFilter();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/auth/register/", "/auth/login/", "/api/properties/", "/api/properties/{propertyId}/").permitAll()
+        http.authorizeRequests().antMatchers("/auth/register/", "/auth/login/", "/api/properties/", "/api/properties/{propertyId}/")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();
+        http.addFilterBefore(authJwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(myAgentDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
+    @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public MyAgentDetails myAgentDetails() {
+        return (MyAgentDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
     }
 
 }
