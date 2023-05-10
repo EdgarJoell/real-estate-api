@@ -1,7 +1,9 @@
 package com.example.realestate.seed;
 
+import com.example.realestate.model.Agent;
 import com.example.realestate.model.Property;
 import com.example.realestate.model.Sale;
+import com.example.realestate.repository.AgentRepository;
 import com.example.realestate.repository.PropertyRepository;
 import com.example.realestate.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +21,24 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     SaleRepository saleRepository;
 
+    @Autowired
+    AgentRepository agentRepository;
+
     @Override
     public void run(String... args) throws Exception {
         loadUserData();
     }
 
     private void loadUserData() {
-        if (propertyRepository.count() == 0) {
+        if (propertyRepository.count() == 0 || saleRepository.count() == 0 || agentRepository.count() == 0) {
+            Agent agent1 = new Agent(1l, "Bob", "mail@gmail.com", "123456", "999-999-9999");
+            Agent agent2 = new Agent(1l, "Tom", "mail1@gmail.com", "123456", "999-999-9988");
+            Agent agent3 = new Agent(1l, "Ann", "mail2@gmail.com", "123456", "999-999-9989");
+
+            agentRepository.save(agent1);
+            agentRepository.save(agent2);
+            agentRepository.save(agent3);
+
             Property property1 = new Property(1L, "123 Programmer Ln", 1500.00, 900);
             Property property2 = new Property(2L, "Sesame St", 800, 400);
             Property property3 = new Property(3L, "Spring Boot Cr", 2000, 1200);
