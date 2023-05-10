@@ -9,6 +9,7 @@ import com.example.realestate.security.JWTUtils;
 import com.example.realestate.security.MyAgentDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -73,9 +74,8 @@ public class AgentService {
 
             final String JWT = jwtUtils.generateJwtToken(myAgentDetails);
             return ResponseEntity.ok(new LoginResponse(JWT));
-//            return ResponseEntity.ok("");
         } catch (Exception e){
-            return ResponseEntity.ok(new LoginResponse("Error: username or password is incorrect"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse("Error: username or password is incorrect"));
         }
     }
 

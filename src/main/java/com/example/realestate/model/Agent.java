@@ -1,5 +1,6 @@
 package com.example.realestate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -28,6 +29,7 @@ public class Agent {
 
     @OneToMany(mappedBy = "agent", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
     private List<Property> propertyList;
 
     @OneToMany(mappedBy = "agent", orphanRemoval = true)

@@ -2,9 +2,12 @@ package com.example.realestate.service;
 
 import com.example.realestate.exception.InformationExistException;
 import com.example.realestate.exception.InformationNotFoundException;
+import com.example.realestate.model.Agent;
 import com.example.realestate.model.Property;
 import com.example.realestate.repository.PropertyRepository;
+import com.example.realestate.security.MyAgentDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +22,11 @@ public class PropertyService {
     @Autowired
     public void setPropertyRepository(PropertyRepository propertyRepository) {
         this.propertyRepository = propertyRepository;
+    }
+
+    public static Agent getCurrentLoggedInAgent(){
+        MyAgentDetails agentDetails = (MyAgentDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return agentDetails.getAgent();
     }
 
     /**
@@ -46,10 +54,12 @@ public class PropertyService {
      */
 
     public Optional<Property> createProperty(Property propertyObject) {
+//        Optional<Property> property = propertyRepository.findById(PropertyService.getCurrentLoggedInAgent().getId());
         Optional<Property> property = propertyRepository.findByAddress(propertyObject.getAddress());
         if (property.isPresent()) {
             throw new InformationExistException("Property " + property.get().getAddress() + " already exists");
         } else {
+            propertyObject.setAgent(PropertyService.getCurrentLoggedInAgent());
             return Optional.of(propertyRepository.save(propertyObject));
         }
     }

@@ -2,6 +2,7 @@ package com.example.realestate.security;
 
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -9,14 +10,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Service
+@PropertySource("classpath:application-dev.properties")
 public class JWTUtils {
 
     Logger logger = Logger.getLogger(JWTUtils.class.getName());
 
-    @Value("C6UlILsE6GJwNqwCTkkvJj9O653yJUoteWMLfYyrc3vaGrrTOrJFAUD1wEBnnposzcQl")
+    @Value("${jwt-secret}")
     private String jwtSecret;
 
-    @Value("86400000")
+    @Value("${jwt-expiration-ms}")
     private int jwtExpirationMs;
 
     public String generateJwtToken(MyAgentDetails myAgentDetails) {

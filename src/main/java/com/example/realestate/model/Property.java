@@ -31,7 +31,6 @@ public class Property {
 
     @ManyToOne
     @JoinColumn(name = "agent_id")
-    @JsonIgnore
     private Agent agent;
 
     public Property() {
@@ -84,6 +83,9 @@ public class Property {
         this.size = size;
     }
 
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
 
     @Override
     public String toString() {
