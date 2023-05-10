@@ -72,7 +72,7 @@ public class PropertyService {
      * @throws InformationNotFoundException if property address not found
      */
     public Optional<Property> updateProperty(Long propertyId, Property propertyObject) {
-        Optional<Property> property = propertyRepository.findByAddress(propertyObject.getAddress());
+        Optional<Property> property = propertyRepository.findByIdAndAgentId(propertyId, PropertyService.getCurrentLoggedInAgent().getId());
         if(property.isPresent()){
             property.get().setPrice(propertyObject.getPrice());
             property.get().setSize(propertyObject.getSize());

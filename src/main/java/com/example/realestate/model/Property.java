@@ -14,7 +14,7 @@ public class Property {
     @Id
     @Column
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long property_id;
+    private Long id;
 
     @Column
     private String address;
@@ -26,18 +26,19 @@ public class Property {
     private int size;
 
     @OneToMany(mappedBy = "property", orphanRemoval = true)
+    @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Sale> saleList;
 
     @ManyToOne
-    @JoinColumn(name = "agent_id")
+    @JoinColumn(name = "agent_id", referencedColumnName = "id")
     private Agent agent;
 
     public Property() {
     }
 
-    public Property(Long property_id, String address, double price, int size) {
-        this.property_id = property_id;
+    public Property(Long id, String address, double price, int size) {
+        this.id = id;
         this.address = address;
         this.price = price;
         this.size = size;
@@ -52,11 +53,11 @@ public class Property {
     }
 
     public Long getProperty_id() {
-        return property_id;
+        return id;
     }
 
     public void setProperty_id(Long property_id) {
-        this.property_id = property_id;
+        this.id = property_id;
     }
 
     public String getAddress() {
@@ -90,7 +91,7 @@ public class Property {
     @Override
     public String toString() {
         return "Property{" +
-                "property_id=" + property_id +
+                "property_id=" + id +
                 ", address='" + address + '\'' +
                 ", price=" + price +
                 ", size='" + size + '\'' +

@@ -11,7 +11,7 @@ public class Sale {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sale_id;
+    private Long id;
 
     @Column
     private double price;
@@ -20,20 +20,18 @@ public class Sale {
     private Date saleDate;
 
     @ManyToOne
-    @JoinColumn(name = "property_id")
-    @JsonIgnore
+    @JoinColumn(name = "property_id", referencedColumnName = "id")
     private Property property;
 
     @ManyToOne
-    @JoinColumn(name = "agent_id")
-    @JsonIgnore
+    @JoinColumn(name = "agent_id", referencedColumnName = "id")
     private Agent agent;
 
     public Sale() {
     }
 
-    public Sale(Long sale_id, double price, Date saleDate, Property property) {
-        this.sale_id = sale_id;
+    public Sale(Long id, double price, Date saleDate, Property property) {
+        this.id = id;
         this.price = price;
         this.saleDate = saleDate;
         this.property = property;
@@ -48,11 +46,11 @@ public class Sale {
     }
 
     public Long getSale_id() {
-        return sale_id;
+        return id;
     }
 
     public void setSale_id(Long sale_id) {
-        this.sale_id = sale_id;
+        this.id = sale_id;
     }
 
     public double getPrice() {
@@ -71,10 +69,18 @@ public class Sale {
         this.saleDate = saleDate;
     }
 
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
     @Override
     public String toString() {
         return "Sale{" +
-                "sale_id=" + sale_id +
+                "id=" + id +
                 ", price=" + price +
                 ", saleDate=" + saleDate +
                 '}';

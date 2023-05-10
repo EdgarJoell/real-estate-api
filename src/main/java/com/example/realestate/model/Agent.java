@@ -34,6 +34,7 @@ public class Agent {
 
     @OneToMany(mappedBy = "agent", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
     private List<Sale> saleList;
 
     public Agent() {

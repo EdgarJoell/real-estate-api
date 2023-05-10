@@ -41,10 +41,10 @@ public class SaleController {
      * @param sale sale we are creating
      * @return the sale we created
      */
-    @PostMapping(path = "/sales/")
+    @PostMapping(path = "/properties/{propertyId}/sales/")
     @ResponseStatus(HttpStatus.CREATED)
-    public Optional<Sale> createSale(@RequestBody Sale sale) {
-        return saleService.createSale(sale);
+    public Optional<Sale> createSale(@PathVariable Long propertyId, @RequestBody Sale sale) {
+        return saleService.createSale(propertyId, sale);
     }
 
 }
