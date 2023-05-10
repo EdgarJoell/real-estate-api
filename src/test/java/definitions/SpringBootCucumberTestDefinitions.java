@@ -46,15 +46,14 @@ public class SpringBootCucumberTestDefinitions {
     }
 
     public String getSecurityKey() throws Exception {
-        Optional<Agent> agent = agentRepository.findById(1L);
         RequestSpecification request = RestAssured.given();
-
         JSONObject requestBody = new JSONObject();
-        requestBody.put("username", agent.get().getEmail());
-        requestBody.put("password", agent.get().getPassword());
-
-        Response authResponse = request.body(requestBody.toString()).post(BASE_URL + port + "/api/authenticate/");
-        return authResponse.jsonPath().getString("token");
+        requestBody.put("email", "mail@gmail.com");
+        requestBody.put("password", "123456");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/login/");
+        JsonPath jPath = response.jsonPath();
+        String res = jPath.getString("message");
+        return res;
     }
 
     @Given("A list of properties are available")
@@ -89,7 +88,8 @@ public class SpringBootCucumberTestDefinitions {
     @When("I add a property to my property list")
     public void iAddAPropertyToMyPropertyList() throws Exception {
         RestAssured.baseURI = BASE_URL;
-        RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + getSecurityKey());
+        String jwtKey = getSecurityKey();
+        RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + jwtKey);
         JSONObject requestBody = new JSONObject();
         requestBody.put("address", "100 South State");
         requestBody.put("size", 900);
