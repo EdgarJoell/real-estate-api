@@ -27,6 +27,7 @@ public class Property {
 
     @OneToMany(mappedBy = "property", orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
+    @JsonIgnore
     private List<Sale> saleList;
 
     @ManyToOne
