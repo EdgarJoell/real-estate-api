@@ -89,7 +89,7 @@ public class PropertyService {
      * @throws InformationNotFoundException if property id does not exist
      */
     public String deleteProperty(Long propertyId) {
-        Optional<Property> property = propertyRepository.findById(propertyId);
+        Optional<Property> property = propertyRepository.findByIdAndAgentId(propertyId, PropertyService.getCurrentLoggedInAgent().getId());
         if(property.isPresent()) {
             propertyRepository.deleteById(propertyId);
             return "Property with id " + propertyId + " was deleted";
