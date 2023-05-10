@@ -1,8 +1,11 @@
 package com.example.realestate.service;
 
+import com.example.realestate.model.Agent;
 import com.example.realestate.model.Sale;
 import com.example.realestate.repository.SaleRepository;
+import com.example.realestate.security.MyAgentDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -17,6 +20,11 @@ public class SaleService {
     @Autowired
     public void setSaleRepository(SaleRepository saleRepository) {
         this.saleRepository = saleRepository;
+    }
+
+    public static Agent getCurrentLoggedInAgent(){
+        MyAgentDetails agentDetails = (MyAgentDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return agentDetails.getAgent();
     }
 
     /**
@@ -42,6 +50,7 @@ public class SaleService {
      * @return sale added
      */
     public Optional<Sale> createSale(@RequestBody Sale sale) {
+        sale.setAgent(PropertyService.getCurrentLoggedInAgent());
         return Optional.of(saleRepository.save(sale));
     }
 

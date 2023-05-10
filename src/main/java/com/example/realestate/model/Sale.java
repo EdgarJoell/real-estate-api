@@ -26,7 +26,6 @@ public class Sale {
 
     @ManyToOne
     @JoinColumn(name = "agent_id")
-    @JsonIgnore
     private Agent agent;
 
     public Sale() {
@@ -69,6 +68,10 @@ public class Sale {
 
     public void setSaleDate(Date saleDate) {
         this.saleDate = saleDate;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
     }
 
     @Override
