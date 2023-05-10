@@ -13,10 +13,10 @@ public class JWTUtils {
 
     Logger logger = Logger.getLogger(JWTUtils.class.getName());
 
-    @Value("${jwt-secret}")
+    @Value("C6UlILsE6GJwNqwCTkkvJj9O653yJUoteWMLfYyrc3vaGrrTOrJFAUD1wEBnnposzcQl")
     private String jwtSecret;
 
-    @Value("${jwt-expiration-ms}")
+    @Value("86400000")
     private int jwtExpirationMs;
 
     public String generateJwtToken(MyAgentDetails myAgentDetails) {
