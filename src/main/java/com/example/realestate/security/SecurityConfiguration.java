@@ -20,6 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/auth/users/register/", "/auth/users/login/", "/api/properties/", "/api/properties/{propertyId}/").permitAll()
