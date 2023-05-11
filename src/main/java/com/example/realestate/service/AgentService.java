@@ -72,6 +72,11 @@ public class AgentService {
         }
     }
 
+    /**
+     * Finds an agent by their email address.
+     * @param email The email that we're searching for.
+     * @return Agent associated with email.
+     */
     public Agent findAgentByEmail(String email) {
         return agentRepository.findAgentByEmail(email);
     }
