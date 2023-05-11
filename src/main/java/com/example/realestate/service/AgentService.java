@@ -57,6 +57,12 @@ public class AgentService {
         return agentRepository.findAgentByEmail(email);
     }
 
+    /**
+     * Registers a new agent if email is not currently being used.
+     * @param agentObject Agent's information to be saved with their profile.
+     * @return A new agent.
+     * @throws InformationExistException if email is already in use with a different agent.
+     */
     public Agent registerAgent(Agent agentObject) {
         if(!agentRepository.existsByEmail(agentObject.getEmail())) {
             agentObject.setPassword(passwordEncoder.encode(agentObject.getPassword()));
