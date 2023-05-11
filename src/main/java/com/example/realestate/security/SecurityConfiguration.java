@@ -62,7 +62,12 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-
+    /**
+     * Handles authentication requests.
+     * @param authConfig Is the value that is being authenticated.
+     * @return Parameter with authentication API
+     * @throws Exception Any exception that may come.
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
