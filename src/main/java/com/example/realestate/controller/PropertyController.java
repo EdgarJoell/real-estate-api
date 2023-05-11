@@ -74,8 +74,8 @@ public class PropertyController {
 
     /**
      * Calls on getPropertiesWithFilter() from PropertyService
-     * @param size property size we are searching for
-     * @param price property price we are searching for
+     * @param size range for property we are searching for
+     * @param price range for property we are searching for
      * @return a list of properties that match size and price
      */
     @GetMapping(path = "/properties/size={size}/price={price}/")
