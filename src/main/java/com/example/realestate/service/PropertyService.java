@@ -106,7 +106,7 @@ public class PropertyService {
         int lowSize = Integer.parseInt(sizeParts[0]);
         int highSize = Integer.parseInt(sizeParts[1]);
 
-        String[] priceParts = size.split("-");
+        String[] priceParts = price.split("-");
         int lowPrice = Integer.parseInt(priceParts[0]);
         int highPrice = Integer.parseInt(priceParts[1]);
 
