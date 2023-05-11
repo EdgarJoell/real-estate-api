@@ -73,6 +73,10 @@ public class SecurityConfiguration {
         return authConfig.getAuthenticationManager();
     }
 
+    /**
+     * Uses a UserDetailService and PasswordEncoder to authenticate user.
+     * @return the authenticated user token.
+     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
