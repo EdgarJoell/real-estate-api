@@ -89,7 +89,6 @@ public class SpringBootCucumberTestDefinitions {
     @Then("The property is added")
     public void thePropertyIsAdded() {
         Assert.assertEquals(201, response.getStatusCode());
-
     }
 
     @When("I update a property from my property list")
@@ -231,6 +230,21 @@ public class SpringBootCucumberTestDefinitions {
 
     @Then("New list of properties is shown with a filter")
     public void newListOfPropertiesIsShownWithAFilter() {
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertNotNull(response.body());
+    }
+
+    @When("I search for properties by agent")
+    public void iSearchForPropertiesByAgent() {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        response = request.get(BASE_URL + port + "/api/properties/agent/1/");
+        Assert.assertNotNull(response.body());
+    }
+
+    @Then("A list of properties is displayed")
+    public void aListOfPropertiesIsDisplayed() {
         Assert.assertEquals(200, response.getStatusCode());
         Assert.assertNotNull(response.body());
     }

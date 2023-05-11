@@ -9,6 +9,8 @@ Feature: Rest API functionalities
     Given A list of properties are available
     When I search for one property by id
     Then property is displayed
+    When I search for properties by agent
+    Then A list of properties is displayed
     When I filter properties list
     Then New list of properties is shown with a filter
     When I add a property to my property list

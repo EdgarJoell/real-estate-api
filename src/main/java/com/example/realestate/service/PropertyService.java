@@ -112,4 +112,9 @@ public class PropertyService {
 
         return bringList.stream().filter(prop -> (prop.getSize() >= lowSize && prop.getSize() <= highSize) && (prop.getPrice() >= lowPrice && prop.getPrice() <= highPrice)).collect(Collectors.toList());
     }
+
+    public List<Property> getPropertyByAgentId(Long agentId){
+        return propertyRepository.findAll().stream().filter(property -> property.getAgent().getId() == agentId)
+                .collect(Collectors.toList());
+    }
 }
