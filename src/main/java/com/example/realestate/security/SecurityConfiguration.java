@@ -39,6 +39,14 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Creates a SecurityFilterChain object for the specified HttpSecurity object.
+     * This filter chain authorizes requests based on users authentication,
+     * allowing access to certain endpoints without authentication.
+     * @param http an HttpSecurity object representing the HTTP security configuration for the application
+     * @return a SecurityFilterChain object representing the security filter chain for the HTTP requests
+     * @throws Exception Exception if an error occurs while creating the filter chain
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/auth/register/", "/auth/login/")
@@ -53,6 +61,7 @@ public class SecurityConfiguration {
         http.addFilterBefore(authJwtRequestFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {

@@ -8,7 +8,6 @@ import com.example.realestate.security.MyAgentDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +28,11 @@ public class SaleService {
         this.propertyService = propertyService;
     }
 
+
+    /**
+     * Get the current logged in agent from jwt
+     * @return logged in agent
+     */
     public static Agent getCurrentLoggedInAgent(){
         MyAgentDetails agentDetails = (MyAgentDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return agentDetails.getAgent();
@@ -65,6 +69,4 @@ public class SaleService {
         sale.setAgent(PropertyService.getCurrentLoggedInAgent());
         return Optional.of(saleRepository.save(sale));
     }
-
-
 }

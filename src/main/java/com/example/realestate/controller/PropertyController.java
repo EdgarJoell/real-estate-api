@@ -72,11 +72,22 @@ public class PropertyController {
         return propertyService.deleteProperty(propertyId);
     }
 
+    /**
+     * Calls on getPropertiesWithFilter() from PropertyService
+     * @param size range for property we are searching for
+     * @param price range for property we are searching for
+     * @return a list of properties that match size and price
+     */
     @GetMapping(path = "/properties/size={size}/price={price}/")
     public List<Property> getPropertiesWithFilter(@PathVariable String size, @PathVariable String price) {
         return propertyService.getPropertiesWithFilter(size, price);
     }
 
+    /**
+     * Calls on getPropertiesByAgentId() from PropertyService
+     * @param agentId we are searching for
+     * @return a list of properties by agent id
+     */
     @GetMapping(path ="/properties/agent/{agentId}/")
     public List<Property> getPropertyByAgentId(@PathVariable Long agentId) {
         return propertyService.getPropertyByAgentId(agentId);

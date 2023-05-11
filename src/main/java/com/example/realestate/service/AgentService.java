@@ -48,6 +48,11 @@ public class AgentService {
         this.agentRepository = agentRepository;
     }
 
+    /**
+     * Finds agent by email address
+     * @param email address we are looking for
+     * @return agent
+     */
     public Agent findAgentByEmailAddress(String email) {
         return agentRepository.findAgentByEmail(email);
     }
@@ -78,5 +83,4 @@ public class AgentService {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new LoginResponse("Error: username or password is incorrect"));
         }
     }
-
 }

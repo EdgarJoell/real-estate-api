@@ -27,6 +27,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JWTUtils jwtUtils;
 
+    /**
+     * Removes bearer from authorization
+     * @param request authorization header value
+     * @return jwt token
+     */
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
         if (StringUtils.hasLength("headerAuth") && headerAuth.startsWith("Bearer")) {
@@ -35,7 +40,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         return null;
     }
 
-
+    /**
+     * Authenticates the user based on a JSON Web Token (JWT) that is provided in the request header
+     * @param request the HTTP request object
+     * @param response the HTTP response object
+     * @param filterChain the filter chain to execute after authentication
+     * @throws ServletException if there is an error in the servlet
+     * @throws IOException  if there is an I/O error
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {

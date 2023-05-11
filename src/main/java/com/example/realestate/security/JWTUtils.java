@@ -21,6 +21,11 @@ public class JWTUtils {
     @Value("${jwt-expiration-ms}")
     private int jwtExpirationMs;
 
+    /**
+     * Generates Jwt token every time agent logins
+     * @param myAgentDetails agents information
+     * @return a generated jwt token
+     */
     public String generateJwtToken(MyAgentDetails myAgentDetails) {
         return Jwts.builder()
                 .setSubject((myAgentDetails.getUsername()))
@@ -30,10 +35,20 @@ public class JWTUtils {
                 .compact();
     }
 
+    /**
+     * Based on the generated jwt token, the agents name will be displayed
+     * @param token generated jwt token during login
+     * @return name of agent
+     */
     public String getAgentNameFromJwtToken(String token) {
         return Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(token).getBody().getSubject();
     }
 
+    /**
+     * Validates token, returns true if valid, logs exception otherwise
+     * @param authToken generated token
+     * @return true if token is valid, false otherwise
+     */
     public boolean validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

@@ -9,8 +9,6 @@ import com.example.realestate.security.MyAgentDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +23,10 @@ public class PropertyService {
         this.propertyRepository = propertyRepository;
     }
 
+    /**
+     * Get the current logged in agent from jwt
+     * @return logged in agent
+     */
     public static Agent getCurrentLoggedInAgent(){
         MyAgentDetails agentDetails = (MyAgentDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return agentDetails.getAgent();
@@ -53,7 +55,6 @@ public class PropertyService {
      * @return the added property object
      * @throws InformationExistException if property already exists
      */
-
     public Optional<Property> createProperty(Property propertyObject) {
 //        Optional<Property> property = propertyRepository.findById(PropertyService.getCurrentLoggedInAgent().getId());
         Optional<Property> property = propertyRepository.findByAddress(propertyObject.getAddress());
@@ -99,6 +100,12 @@ public class PropertyService {
         }
     }
 
+    /**
+     * Filters a list of properties based on a size and price range
+     * @param size range of property we are searching for
+     * @param price range of property we are searching for
+     * @return a list of properties that match size and price
+     */
     public List<Property> getPropertiesWithFilter(String size, String price) {
         List<Property> bringList = propertyRepository.findAll();
 
@@ -110,9 +117,15 @@ public class PropertyService {
         int lowPrice = Integer.parseInt(priceParts[0]);
         int highPrice = Integer.parseInt(priceParts[1]);
 
-        return bringList.stream().filter(prop -> (prop.getSize() >= lowSize && prop.getSize() <= highSize) && (prop.getPrice() >= lowPrice && prop.getPrice() <= highPrice)).collect(Collectors.toList());
+        return bringList.stream().filter(prop -> (prop.getSize() >= lowSize && prop.getSize() <= highSize)
+                && (prop.getPrice() >= lowPrice && prop.getPrice() <= highPrice)).collect(Collectors.toList());
     }
 
+    /**
+     * Filters a list of properties by agent id
+     * @param agentId we are searching for
+     * @return a list of properties based on agent id
+     */
     public List<Property> getPropertyByAgentId(Long agentId){
         return propertyRepository.findAll().stream().filter(property -> property.getAgent().getId() == agentId)
                 .collect(Collectors.toList());
