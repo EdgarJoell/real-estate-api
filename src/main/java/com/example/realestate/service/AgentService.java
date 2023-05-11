@@ -57,6 +57,12 @@ public class AgentService {
         return agentRepository.findAgentByEmail(email);
     }
 
+    /**
+     * Registers a new agent if email is not currently being used.
+     * @param agentObject Agent's information to be saved with their profile.
+     * @return A new agent.
+     * @throws InformationExistException if email is already in use with a different agent.
+     */
     public Agent registerAgent(Agent agentObject) {
         if(!agentRepository.existsByEmail(agentObject.getEmail())) {
             agentObject.setPassword(passwordEncoder.encode(agentObject.getPassword()));
@@ -66,10 +72,20 @@ public class AgentService {
         }
     }
 
+    /**
+     * Finds an agent by their email address.
+     * @param email The email that we're searching for.
+     * @return Agent associated with email.
+     */
     public Agent findAgentByEmail(String email) {
         return agentRepository.findAgentByEmail(email);
     }
 
+    /**
+     * Logs in agent with credentials given by user.
+     * @param loginRequest The credentials to log in.
+     * @return Authenticated agent.
+     */
     public ResponseEntity<?> loginAgent(@RequestBody LoginRequest loginRequest){
         try {
             Authentication authentication = authenticationManager.authenticate(
