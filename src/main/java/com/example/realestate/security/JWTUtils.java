@@ -35,6 +35,11 @@ public class JWTUtils {
                 .compact();
     }
 
+    /**
+     * Based on the generated jwt token, the agents name will be displayed
+     * @param token generated jwt token during login
+     * @return name of agent
+     */
     public String getAgentNameFromJwtToken(String token) {
         return Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(token).getBody().getSubject();
     }
