@@ -57,7 +57,6 @@ public class PropertyService {
      * @return the added property object
      * @throws InformationExistException if property already exists
      */
-
     public Optional<Property> createProperty(Property propertyObject) {
 //        Optional<Property> property = propertyRepository.findById(PropertyService.getCurrentLoggedInAgent().getId());
         Optional<Property> property = propertyRepository.findByAddress(propertyObject.getAddress());
@@ -103,6 +102,12 @@ public class PropertyService {
         }
     }
 
+    /**
+     * Filters a list of properties based on a size and price range
+     * @param size range of property we are searching for
+     * @param price range of property we are searching for
+     * @return a list of properties that match size and price
+     */
     public List<Property> getPropertiesWithFilter(String size, String price) {
         List<Property> bringList = propertyRepository.findAll();
 
@@ -114,7 +119,8 @@ public class PropertyService {
         int lowPrice = Integer.parseInt(priceParts[0]);
         int highPrice = Integer.parseInt(priceParts[1]);
 
-        return bringList.stream().filter(prop -> (prop.getSize() >= lowSize && prop.getSize() <= highSize) && (prop.getPrice() >= lowPrice && prop.getPrice() <= highPrice)).collect(Collectors.toList());
+        return bringList.stream().filter(prop -> (prop.getSize() >= lowSize && prop.getSize() <= highSize)
+                && (prop.getPrice() >= lowPrice && prop.getPrice() <= highPrice)).collect(Collectors.toList());
     }
 
     public List<Property> getPropertyByAgentId(Long agentId){
