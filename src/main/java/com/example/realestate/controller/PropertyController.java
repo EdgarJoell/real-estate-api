@@ -76,4 +76,9 @@ public class PropertyController {
     public List<Property> getPropertiesWithFilter(@PathVariable String size, @PathVariable String price) {
         return propertyService.getPropertiesWithFilter(size, price);
     }
+
+    @GetMapping(path ="/properties/agent/{agentId}/")
+    public List<Property> getPropertyByAgentId(@PathVariable Long agentId) {
+        return propertyService.getPropertyByAgentId(agentId);
+    }
 }

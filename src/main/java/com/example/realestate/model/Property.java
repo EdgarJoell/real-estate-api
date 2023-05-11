@@ -97,5 +97,4 @@ public class Property {
                 ", size='" + size + '\'' +
                 '}';
     }
-
 }
