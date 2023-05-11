@@ -26,7 +26,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @CucumberContextConfiguration
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = RealEstateApplication.class)
@@ -50,10 +49,9 @@ public class SpringBootCucumberTestDefinitions {
         JSONObject requestBody = new JSONObject();
         requestBody.put("email", "mail@gmail.com");
         requestBody.put("password", "123456");
+        request.header("Content-Type", "application/json");
         response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/login/");
-        JsonPath jPath = response.jsonPath();
-        String res = jPath.getString("message");
-        return res;
+        return response.jsonPath().getString("message");
     }
 
     @Given("A list of properties are available")
