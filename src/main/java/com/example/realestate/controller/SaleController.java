@@ -21,6 +21,10 @@ public class SaleController {
         this.saleService = saleService;
     }
 
+    /**
+     * Calls on getSales() from Sale Service
+     * @return a list of sales
+     */
     @GetMapping(path = "/sales/")
     public List<Sale> getSales() {
         return saleService.getSales();
