@@ -4,6 +4,7 @@ import com.example.realestate.model.Property;
 import com.example.realestate.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -69,5 +70,10 @@ public class PropertyController {
     @DeleteMapping(path = "/properties/{propertyId}")
     public String deleteProperty(@PathVariable Long propertyId) {
         return propertyService.deleteProperty(propertyId);
+    }
+
+    @GetMapping(path = "/properties/size={size}/price={price}/")
+    public List<Property> getPropertiesWithFilter(@PathVariable String size, @PathVariable String price) {
+        return propertyService.getPropertiesWithFilter(size, price);
     }
 }

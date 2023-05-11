@@ -220,4 +220,18 @@ public class SpringBootCucumberTestDefinitions {
         Assert.assertNotNull(response.body());
     }
 
+    @When("I filter properties list")
+    public void iFilterPropertiesList() {
+        RestAssured.baseURI = BASE_URL;
+        RequestSpecification request = RestAssured.given();
+        request.header("Content-Type", "application/json");
+        response = request.get(BASE_URL + port + "/api/properties/size={size}/price={price}/", "700-1000", "0-3000");
+        Assert.assertNotNull(response.body());
+    }
+
+    @Then("New list of properties is shown with a filter")
+    public void newListOfPropertiesIsShownWithAFilter() {
+        Assert.assertEquals(200, response.getStatusCode());
+        Assert.assertNotNull(response.body());
+    }
 }
