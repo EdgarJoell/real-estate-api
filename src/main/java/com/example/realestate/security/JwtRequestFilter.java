@@ -40,7 +40,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         return null;
     }
 
-
+    /**
+     * Authenticates the user based on a JSON Web Token (JWT) that is provided in the request header
+     * @param request the HTTP request object
+     * @param response the HTTP response object
+     * @param filterChain the filter chain to execute after authentication
+     * @throws ServletException if there is an error in the servlet
+     * @throws IOException  if there is an I/O error
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
