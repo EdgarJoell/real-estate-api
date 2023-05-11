@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PropertyService {
@@ -96,5 +97,19 @@ public class PropertyService {
         } else {
             throw new InformationNotFoundException("Property with id: " + propertyId + " doesn't exist");
         }
+    }
+
+    public List<Property> getPropertiesWithFilter(String size, String price) {
+        List<Property> bringList = propertyRepository.findAll();
+
+        String[] sizeParts = size.split("-");
+        int lowSize = Integer.parseInt(sizeParts[0]);
+        int highSize = Integer.parseInt(sizeParts[1]);
+
+        String[] priceParts = size.split("-");
+        int lowPrice = Integer.parseInt(priceParts[0]);
+        int highPrice = Integer.parseInt(priceParts[1]);
+
+        return bringList.stream().filter(prop -> (prop.getSize() >= lowSize && prop.getSize() <= highSize) && (prop.getPrice() >= lowPrice && prop.getPrice() <= highPrice)).collect(Collectors.toList());
     }
 }

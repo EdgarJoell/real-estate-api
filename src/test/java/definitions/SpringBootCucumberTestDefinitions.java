@@ -225,7 +225,7 @@ public class SpringBootCucumberTestDefinitions {
         RestAssured.baseURI = BASE_URL;
         RequestSpecification request = RestAssured.given();
         request.header("Content-Type", "application/json");
-        response = request.get(BASE_URL + port + "/api/properties/{lowSize}-{highSize}/", 1000, 2000);
+        response = request.get(BASE_URL + port + "/api/properties/size={size}/price={price}/", "700-1000", "0-3000");
         Assert.assertNotNull(response.body());
     }
 
