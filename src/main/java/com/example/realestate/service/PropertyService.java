@@ -25,6 +25,10 @@ public class PropertyService {
         this.propertyRepository = propertyRepository;
     }
 
+    /**
+     * Get the current logged in agent from jwt
+     * @return logged in agent
+     */
     public static Agent getCurrentLoggedInAgent(){
         MyAgentDetails agentDetails = (MyAgentDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return agentDetails.getAgent();
