@@ -103,9 +103,9 @@ public class SpringBootCucumberTestDefinitions {
     }
 
     @When("I update a property from my property list")
-    public void iUpdateAPropertyFromMyPropertyList() throws JSONException {
+    public void iUpdateAPropertyFromMyPropertyList() throws Exception {
         RestAssured.baseURI = BASE_URL;
-        RequestSpecification request = RestAssured.given();
+        RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + getSecurityKey());
         JSONObject requestBody = new JSONObject();
         requestBody.put("address", "123 Programmer Ln");
         requestBody.put("size", 200);
@@ -121,9 +121,9 @@ public class SpringBootCucumberTestDefinitions {
     }
 
     @When("I delete a property from property list")
-    public void iDeleteAPropertyFromPropertyList() {
+    public void iDeleteAPropertyFromPropertyList() throws Exception {
         RestAssured.baseURI = BASE_URL;
-        RequestSpecification request = RestAssured.given();
+        RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + getSecurityKey());
         request.header("Content-Type", "application/json");
         response = request.delete(BASE_URL + port + "/api/properties/1/");
     }
@@ -137,8 +137,14 @@ public class SpringBootCucumberTestDefinitions {
     @Given("A list of sales are available")
     public void aListOfSalesAreAvailable() {
         try {
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("Authorization", "Bearer " + getSecurityKey());
+            HttpEntity<String> request = new HttpEntity<String>("", headers);
+
             ResponseEntity<String> response = new RestTemplate()
-                    .exchange(BASE_URL + port + "/api/sales/", HttpMethod.GET, null, String.class);
+                    .exchange(BASE_URL + port + "/api/sales/", HttpMethod.GET, request, String.class);
             List<Map<String, String>> sales = JsonPath
                     .from(String.valueOf(response
                             .getBody()))
@@ -147,14 +153,16 @@ public class SpringBootCucumberTestDefinitions {
             Assert.assertTrue(sales.size() > 0);
         } catch (HttpClientErrorException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
     }
 
     @When("I search for one sale by id")
-    public void iSearchForOneSaleById() {
+    public void iSearchForOneSaleById() throws Exception {
         RestAssured.baseURI = BASE_URL;
-        RequestSpecification request = RestAssured.given();
+        RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + getSecurityKey());
         request.header("Content-Type", "application/json");
         response = request.get(BASE_URL + port + "/api/sales/1/");
         Assert.assertNotNull(response.body());
@@ -167,14 +175,14 @@ public class SpringBootCucumberTestDefinitions {
     }
 
     @When("I add a sale to my sales list")
-    public void iAddASaleToMySalesList() throws JSONException {
+    public void iAddASaleToMySalesList() throws Exception {
         RestAssured.baseURI = BASE_URL;
-        RequestSpecification request = RestAssured.given();
+        RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + getSecurityKey());
         JSONObject requestBody = new JSONObject();
         requestBody.put("price", 100000.00);
         requestBody.put("Date", new Date(2022, 2, 2));
         request.header("Content-Type", "application/json");
-        response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/sales/");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/api/properties/1/sales/");
     }
 
     @Then("The sale is added")
