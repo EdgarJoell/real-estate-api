@@ -83,6 +83,11 @@ public class PropertyController {
         return propertyService.getPropertiesWithFilter(size, price);
     }
 
+    /**
+     * Calls on getPropertiesByAgentId() from PropertyService
+     * @param agentId we are searching for
+     * @return a list of properties by agent id
+     */
     @GetMapping(path ="/properties/agent/{agentId}/")
     public List<Property> getPropertyByAgentId(@PathVariable Long agentId) {
         return propertyService.getPropertyByAgentId(agentId);
