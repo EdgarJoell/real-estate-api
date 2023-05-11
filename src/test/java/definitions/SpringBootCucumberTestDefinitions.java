@@ -1,10 +1,7 @@
 package definitions;
 
 import com.example.realestate.RealEstateApplication;
-import com.example.realestate.model.Agent;
-import com.example.realestate.model.Property;
 import com.example.realestate.repository.AgentRepository;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,7 +13,6 @@ import io.restassured.specification.RequestSpecification;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
@@ -37,12 +33,6 @@ public class SpringBootCucumberTestDefinitions {
 
     private static Response response;
 
-    private AgentRepository agentRepository;
-
-    @Autowired
-    public void setAgentRepository(AgentRepository agentRepository) {
-        this.agentRepository = agentRepository;
-    }
 
     public String getSecurityKey() throws Exception {
         RequestSpecification request = RestAssured.given();
