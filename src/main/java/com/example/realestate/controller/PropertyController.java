@@ -72,6 +72,12 @@ public class PropertyController {
         return propertyService.deleteProperty(propertyId);
     }
 
+    /**
+     * Calls on getPropertiesWithFilter() from PropertyService
+     * @param size property size we are searching for
+     * @param price property price we are searching for
+     * @return a list of properties that match size and price
+     */
     @GetMapping(path = "/properties/size={size}/price={price}/")
     public List<Property> getPropertiesWithFilter(@PathVariable String size, @PathVariable String price) {
         return propertyService.getPropertiesWithFilter(size, price);
