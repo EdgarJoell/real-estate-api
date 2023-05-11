@@ -123,6 +123,11 @@ public class PropertyService {
                 && (prop.getPrice() >= lowPrice && prop.getPrice() <= highPrice)).collect(Collectors.toList());
     }
 
+    /**
+     * Filters a list of properties by agent id
+     * @param agentId we are searching for
+     * @return a list of properties based on agent id
+     */
     public List<Property> getPropertyByAgentId(Long agentId){
         return propertyRepository.findAll().stream().filter(property -> property.getAgent().getId() == agentId)
                 .collect(Collectors.toList());
