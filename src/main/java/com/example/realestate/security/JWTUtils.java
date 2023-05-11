@@ -21,6 +21,11 @@ public class JWTUtils {
     @Value("${jwt-expiration-ms}")
     private int jwtExpirationMs;
 
+    /**
+     * Generates Jwt token every time agent logins
+     * @param myAgentDetails agents information
+     * @return a generated jwt token
+     */
     public String generateJwtToken(MyAgentDetails myAgentDetails) {
         return Jwts.builder()
                 .setSubject((myAgentDetails.getUsername()))
