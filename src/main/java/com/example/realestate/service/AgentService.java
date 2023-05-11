@@ -81,6 +81,11 @@ public class AgentService {
         return agentRepository.findAgentByEmail(email);
     }
 
+    /**
+     * Logs in agent with credentials given by user.
+     * @param loginRequest The credentials to log in.
+     * @return Authenticated agent.
+     */
     public ResponseEntity<?> loginAgent(@RequestBody LoginRequest loginRequest){
         try {
             Authentication authentication = authenticationManager.authenticate(
