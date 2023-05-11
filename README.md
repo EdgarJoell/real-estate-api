@@ -5,6 +5,15 @@ Real Estate Management System: A RestAPI for a real estate management system tha
 
 <br>
 
+## Tools and Technologies
+* Java
+* IDE - IntelliJ
+* Spring Boot
+* JPA
+* JWT
+* Postman
+* Cucumber Spring Integration
+
 ## User Stories
 Bronze:
 - As an agent, I should be able to login into my account to use the application and get access to property listings.
@@ -15,7 +24,7 @@ Bronze:
 
 Silver:
 - As a customer, I should be able to view all property listings.
-- As a customer, I should be able to filter properties based on price, size, and location.
+- As a customer, I should be able to filter properties based on price, size.
 - As a customer, I should be able to find properties listed by a specific agent.
 
 Gold:
