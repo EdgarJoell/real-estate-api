@@ -27,6 +27,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JWTUtils jwtUtils;
 
+    /**
+     * Removes bearer from authorization
+     * @param request authorization header value
+     * @return jwt token
+     */
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
         if (StringUtils.hasLength("headerAuth") && headerAuth.startsWith("Bearer")) {
