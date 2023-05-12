@@ -32,8 +32,12 @@ public class SpringBootCucumberTestDefinitions {
 
     private static Response response;
 
-
-    public String getSecurityKey() throws Exception {
+    /**
+     * Generates a jwt key every time agent logs in
+     * @return jwt key
+     * @throws JSONException if arguments cannot be converted to JSON
+     */
+    public String getSecurityKey() throws JSONException {
         RequestSpecification request = RestAssured.given();
         JSONObject requestBody = new JSONObject();
         requestBody.put("email", "mail@gmail.com");
