@@ -87,6 +87,9 @@ Gold:
 | GET          | /sales/{id}/                           | Get sale by id                  | Private |
 | POST         | /property/{propertyId}/sales/          | Add sale                        | Private |
 
+## Planning Documentation
+* Click [here](https://github.com/users/EdgarJoell/projects/1/views/1) to see our planning process.
+
 ## Dependencies
 * Spring Boot Starter
 * Spring Boot Starter Test
