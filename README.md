@@ -90,6 +90,12 @@ Gold:
 ## Planning Documentation
 * Click [here](https://github.com/users/EdgarJoell/projects/1/views/1) to see our planning process.
 
+<br> 
+
+## Future Work 
+
+<img src="future-work.png" style="height: 35rem;">
+
 ## Dependencies
 * Spring Boot Starter
 * Spring Boot Starter Test
