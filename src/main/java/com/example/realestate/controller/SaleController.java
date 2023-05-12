@@ -1,7 +1,6 @@
 package com.example.realestate.controller;
 
 import com.example.realestate.model.Sale;
-import com.example.realestate.repository.SaleRepository;
 import com.example.realestate.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
