@@ -53,18 +53,20 @@ Gold:
 
 ## API Endpoints
 
-| Request Type | URL                   | Functionality              | Access | 
-|--------------|-----------------------|----------------------------|---------|
-| POST         | /users/login/         | User login               	 | Public |
-| POST         | /users/register/      | User registration        	 | Public |
-| GET          | /properties/          | Properties 		              | Public |
-| GET          | /properties/{id}/     | Property           	       | Public |
-| POST         | /properties/          | Create Property          	 | Private |
-| PUT          | /properties/{id}/     | Update Property         	  | Private |
-| DELETE       | /properties/{id}/   	 | Delete Property         	  | Private |
-| GET        | /sales/               | Get all sales              | Private |
-| GET        | /sales/{id}/          | Get sale by id             | Private |
-| POST        | /sales/               | Add sale                   | Private |
+| Request Type | URL                                    | Functionality                   | Access  | 
+|--------------|----------------------------------------|---------------------------------|---------|
+| POST         | /users/login/                          | User login               	      | Public  |
+| POST         | /users/register/                       | User registration        	      | Public  |
+| GET          | /properties/                           | Properties 		                   | Public  |
+| GET          | /properties/{id}/                      | Property           	            | Public  |
+| POST         | /properties/                           | Create Property          	      | Private |
+| PUT          | /properties/{id}/                      | Update Property         	       | Private |
+| DELETE       | /properties/{id}/   	                  | Delete Property         	       | Private |
+| GET          | /properties/size={size}/price={price}/ | Filter properties by parameters | Public  |
+| GET          | /properties/agent/{agentId}/           | Get properties by agent         | Public  |
+| GET          | /sales/                                | Get all sales                   | Private |
+| GET          | /sales/{id}/                           | Get sale by id                  | Private |
+| POST         | /property/{propertyId}/sales/          | Add sale                        | Private |
 
 ## Dependencies
 * Spring Boot Starter
