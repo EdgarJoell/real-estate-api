@@ -77,7 +77,7 @@ public class SpringBootCucumberTestDefinitions {
     public void iAddAPropertyToMyPropertyList() throws Exception {
         RestAssured.baseURI = BASE_URL;
         String jwtKey = getSecurityKey();
-        RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + jwtKey);
+        RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + getSecurityKey());
         JSONObject requestBody = new JSONObject();
         requestBody.put("address", "100 South State");
         requestBody.put("size", 900);
