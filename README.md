@@ -26,7 +26,10 @@ Once scenarios were created, we began to program our services, repositories, and
 test each CRUD method one-by-one ensuring that we were getting the expected end result both by 
 running the tests in IntelliJ and in Postman.
 
+## Hurdles
+Our major hurdle was implementing security for cucumber testing. Specifically on the two code blocks below:  
 
+This code block generate Jwt key, every time the agent logs in. 
 ```
     public String getSecurityKey() throws Exception {
         RequestSpecification request = RestAssured.given();
@@ -38,10 +41,11 @@ running the tests in IntelliJ and in Postman.
         return response.jsonPath().getString("message");
     }
 ```
-
+The key generated in the code above is called in the request header for other tests.  
 ```
-    RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + jwtKey);
+    RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + getSecurityKey());
 ```
+We overcame this by writing a separate getSecurityKey() method inside the testing definitions.
 
 ## User Stories
 Bronze:
@@ -60,13 +64,11 @@ Gold:
 - As an agent, I should be able to add pictures of the property listing.
 - As a customer, I should be able to see pictures of the property listing.
 
-<br>
 
 ## ERD Diagram
 
 <img src="erd-diagram.png" style="height: 35rem;">
 
-<br>
 
 ## API Endpoints
 
@@ -84,6 +86,9 @@ Gold:
 | GET          | /sales/                                | Get all sales                   | Private |
 | GET          | /sales/{id}/                           | Get sale by id                  | Private |
 | POST         | /property/{propertyId}/sales/          | Add sale                        | Private |
+
+## Planning Documentation
+* Click [here](https://github.com/users/EdgarJoell/projects/1/views/1) to see our planning process.
 
 ## Dependencies
 * Spring Boot Starter
