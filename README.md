@@ -26,6 +26,23 @@ Once scenarios were created, we began to program our services, repositories, and
 test each CRUD method one-by-one ensuring that we were getting the expected end result both by 
 running the tests in IntelliJ and in Postman.
 
+
+```
+    public String getSecurityKey() throws Exception {
+        RequestSpecification request = RestAssured.given();
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("email", "mail@gmail.com");
+        requestBody.put("password", "123456");
+        request.header("Content-Type", "application/json");
+        response = request.body(requestBody.toString()).post(BASE_URL + port + "/auth/login/");
+        return response.jsonPath().getString("message");
+    }
+```
+
+```
+    RequestSpecification request = RestAssured.given().header("Authorization", "Bearer " + jwtKey);
+```
+
 ## User Stories
 Bronze:
 - As an agent, I should be able to login into my account to use the application and get access to property listings.
