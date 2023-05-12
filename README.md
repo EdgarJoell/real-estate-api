@@ -9,6 +9,7 @@ Real Estate Management System: A RestAPI for a real estate management system tha
 * Spring Boot
 * JPA
 * JWT
+* Maven
 * Postman
 * Cucumber Spring Integration
 
@@ -64,3 +65,21 @@ Gold:
 | GET        | /sales/               | Get all sales              | Private |
 | GET        | /sales/{id}/          | Get sale by id             | Private |
 | POST        | /sales/               | Add sale                   | Private |
+
+## Dependencies
+* Spring Boot Starter
+* Spring Boot Starter Test
+* Spring boot Starter Web
+* Spring Boot Starter Data JPA
+* Spring Boot Devtools
+* Spring Boot Starter Security
+* H2 Database
+* Spring Boot Starter JDBC
+* JUnit
+* Cucumber-Java
+* Cucumber-JUnit
+* Cucumber Spring
+* Rest Assured
+* JJwt API
+* JJwt IMPL
+* JJwt Jackson
