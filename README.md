@@ -86,18 +86,18 @@ Gold:
 
 | Request Type | URL                                    | Functionality                   | Access  | 
 |--------------|----------------------------------------|---------------------------------|---------|
-| POST         | /users/login/                          | User login               	      | Public  |
-| POST         | /users/register/                       | User registration        	      | Public  |
-| GET          | /properties/                           | Properties 		                   | Public  |
-| GET          | /properties/{id}/                      | Property           	            | Public  |
+| POST         | /auth/login/                           | User login               	      | Public  |
+| POST         | /auth/register/                        | User registration        	      | Public  |
 | POST         | /properties/                           | Create Property          	      | Private |
 | PUT          | /properties/{id}/                      | Update Property         	       | Private |
 | DELETE       | /properties/{id}/   	                  | Delete Property         	       | Private |
+| GET          | /properties/                           | Properties 		                   | Public  |
+| GET          | /properties/{id}/                      | Property           	            | Public  |
 | GET          | /properties/size={size}/price={price}/ | Filter properties by parameters | Public  |
 | GET          | /properties/agent/{agentId}/           | Get properties by agent         | Public  |
 | GET          | /sales/                                | Get all sales                   | Private |
 | GET          | /sales/{id}/                           | Get sale by id                  | Private |
-| POST         | /property/{propertyId}/sales/          | Add sale                        | Private |
+| POST         | /properties/{propertyId}/sales/        | Add sale                        | Private |
 
 ## Planning Documentation
 * Click [here](https://github.com/users/EdgarJoell/projects/1/views/1) to see our planning process.
