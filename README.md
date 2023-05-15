@@ -1,4 +1,15 @@
 # Real-Estate API
+## Table of Contents
+
+- [Overview](#overview)
+- [Approach](#approach)
+- [Hurdles](#hurdles)
+- [User Stories](#user-stories)
+- [ERD Diagram](#erd-diagram)
+- [API Endpoints](#api-endpoints)
+- [Planning Documentation](#planning-documentation)
+- [Future Work](#future-work)
+- [Dependencies](#dependencies)
 
 ## Overview
 Real Estate Management System: A RestAPI for a real estate management system that allows agents to create, delete, and update property listings, manage property sales, and allow all users to view properties listed.
@@ -47,52 +58,53 @@ The key generated in the code above is called in the request header for other te
 ```
 We overcame this by writing a separate getSecurityKey() method inside the testing definitions.
 
-## User Stories
-Bronze:
-- As an agent, I should be able to login into my account to use the application and get access to property listings.
-- As an agent, I should be able to add a property listing.
-- As an agent, I should be able to update a property listing.
-- As an agent, I should be able to delete a property listing.
-- As an agent, I should be able to sell properties.
-
-Silver:
-- As a customer, I should be able to view all property listings.
-- As a customer, I should be able to filter properties based on price, size.
-- As a customer, I should be able to find properties listed by a specific agent.
-
-Gold:
-- As an agent, I should be able to add pictures of the property listing.
-- As a customer, I should be able to see pictures of the property listing.
-
-
 ## ERD Diagram
 
 <img src="erd-diagram.png" style="height: 35rem;">
+
+## User Stories
+Bronze:
+- As an agent, I should be able to login into my account so that get access to property listings.
+- As an agent, I should be able to add a property listing so that others can see new property.
+- As an agent, I should be able to update a property listing so that information for property changes for all users.
+- As an agent, I should be able to delete a property listing so that property no longer listed.
+- As an agent, I should be able to sell properties so that list of properties sold will be updated.
+
+Silver:
+- As a customer, I should be able to view all property listings so that I can choose a property I want to buy.
+- As a customer, I should be able to filter properties based on price and size so that it's easier for me to find property.
+- As a customer, I should be able to find properties listed by a specific agent so that I can see only listings from certain agent.
+
+Gold:
+- As an agent, I should be able to add pictures of the property listing so that users will know more about property.
+- As a customer, I should be able to see pictures of the property listing so that it's easier to find property I like.
+
+
 
 
 ## API Endpoints
 
 | Request Type | URL                                    | Functionality                   | Access  | 
 |--------------|----------------------------------------|---------------------------------|---------|
-| POST         | /users/login/                          | User login               	      | Public  |
-| POST         | /users/register/                       | User registration        	      | Public  |
-| GET          | /properties/                           | Properties 		                   | Public  |
-| GET          | /properties/{id}/                      | Property           	            | Public  |
+| POST         | /auth/login/                           | User login               	      | Public  |
+| POST         | /auth/register/                        | User registration        	      | Public  |
 | POST         | /properties/                           | Create Property          	      | Private |
 | PUT          | /properties/{id}/                      | Update Property         	       | Private |
 | DELETE       | /properties/{id}/   	                  | Delete Property         	       | Private |
+| GET          | /properties/                           | Properties 		                   | Public  |
+| GET          | /properties/{id}/                      | Property           	            | Public  |
 | GET          | /properties/size={size}/price={price}/ | Filter properties by parameters | Public  |
 | GET          | /properties/agent/{agentId}/           | Get properties by agent         | Public  |
 | GET          | /sales/                                | Get all sales                   | Private |
 | GET          | /sales/{id}/                           | Get sale by id                  | Private |
-| POST         | /property/{propertyId}/sales/          | Add sale                        | Private |
+| POST         | /properties/{propertyId}/sales/        | Add sale                        | Private |
 
 ## Planning Documentation
 * Click [here](https://github.com/users/EdgarJoell/projects/1/views/1) to see our planning process.
 
 <br> 
 
-## Future Work 
+## Future Work
 
 <img src="future-work.png" style="height: 35rem;">
 
