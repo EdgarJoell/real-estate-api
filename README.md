@@ -125,3 +125,8 @@ Gold:
 * JJwt API
 * JJwt IMPL
 * JJwt Jackson
+
+### Resources
+- Stack Overflow
+- Zillow  (for property inspiration)
+- Code from previous lessons
