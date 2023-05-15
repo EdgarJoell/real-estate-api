@@ -49,20 +49,20 @@ We overcame this by writing a separate getSecurityKey() method inside the testin
 
 ## User Stories
 Bronze:
-- As an agent, I should be able to login into my account to use the application and get access to property listings.
-- As an agent, I should be able to add a property listing.
-- As an agent, I should be able to update a property listing.
-- As an agent, I should be able to delete a property listing.
-- As an agent, I should be able to sell properties.
+- As an agent, I should be able to login into my account so that get access to property listings.
+- As an agent, I should be able to add a property listing so that others can see new property.
+- As an agent, I should be able to update a property listing so that information for property changes for all users.
+- As an agent, I should be able to delete a property listing so that property no longer listed.
+- As an agent, I should be able to sell properties so that list of properties sold will be updated.
 
 Silver:
-- As a customer, I should be able to view all property listings.
-- As a customer, I should be able to filter properties based on price, size.
-- As a customer, I should be able to find properties listed by a specific agent.
+- As a customer, I should be able to view all property listings so that I can choose a property I want to buy.
+- As a customer, I should be able to filter properties based on price and size so that it's easier for me to find property.
+- As a customer, I should be able to find properties listed by a specific agent so that I can see only listings from certain agent.
 
 Gold:
-- As an agent, I should be able to add pictures of the property listing.
-- As a customer, I should be able to see pictures of the property listing.
+- As an agent, I should be able to add pictures of the property listing so that users will know more about property.
+- As a customer, I should be able to see pictures of the property listing so that it's easier to find property I like.
 
 
 ## ERD Diagram
