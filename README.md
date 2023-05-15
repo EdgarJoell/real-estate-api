@@ -58,6 +58,10 @@ The key generated in the code above is called in the request header for other te
 ```
 We overcame this by writing a separate getSecurityKey() method inside the testing definitions.
 
+## ERD Diagram
+
+<img src="erd-diagram.png" style="height: 35rem;">
+
 ## User Stories
 Bronze:
 - As an agent, I should be able to login into my account so that get access to property listings.
@@ -76,9 +80,6 @@ Gold:
 - As a customer, I should be able to see pictures of the property listing so that it's easier to find property I like.
 
 
-## ERD Diagram
-
-<img src="erd-diagram.png" style="height: 35rem;">
 
 
 ## API Endpoints
