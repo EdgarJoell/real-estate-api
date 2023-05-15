@@ -1,4 +1,15 @@
 # Real-Estate API
+## Table of Contents
+
+- [Overview](#overview)
+- [Approach](#approach)
+- [Hurdles](#hurdles)
+- [User Stories](#user-stories)
+- [ERD Diagram](#erd-diagram)
+- [API Endpoints](#api-endpoints)
+- [Planning Documentation](#planning-documentation)
+- [Future Work](#future-work)
+- [Dependencies](#dependencies)
 
 ## Overview
 Real Estate Management System: A RestAPI for a real estate management system that allows agents to create, delete, and update property listings, manage property sales, and allow all users to view properties listed.
@@ -92,7 +103,7 @@ Gold:
 
 <br> 
 
-## Future Work 
+## Future Work
 
 <img src="future-work.png" style="height: 35rem;">
 
